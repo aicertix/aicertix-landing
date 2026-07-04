@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AiCertix — Formación en comercio exterior para el Perú que exporta</title>
+<meta name="description" content="Cursos de exportación e importación con instructor IA, datos oficiales de aduanas y simuladores prácticos. Muy pronto en el Perú.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --tinta:#0E2A3A;        /* azul tinta aduanera (fondo) */
+    --tinta-2:#123549;
+    --papel:#F6F3EA;        /* papel de documento */
+    --linea:#28495C;        /* líneas del manifiesto sobre tinta */
+    --linea-doc:#C9C2AE;    /* líneas sobre papel */
+    --verde:#1E7A4C;        /* verde agro (acción) */
+    --verde-osc:#155C39;
+    --sello:#B3272F;        /* rojo sello de aduana (solo el sello) */
+    --gris:#8FA6B2;         /* utilitario sobre tinta */
+    --gris-doc:#6E6A5C;     /* utilitario sobre papel */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--tinta);
+    color:var(--papel);
+    font-family:"Archivo",system-ui,sans-serif;
+    font-variation-settings:"wdth" 100;
+    line-height:1.55;
+    min-height:100vh;
+  }
+  a{color:inherit}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  /* ---- Cabecera tipo documento ---- */
+  header{
+    border-bottom:1px solid var(--linea);
+    padding:14px clamp(16px,4vw,48px);
+    display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+  }
+  .marca{font-weight:900;font-variation-settings:"wdth" 125;letter-spacing:.02em;font-size:1.15rem}
+  .marca span{color:var(--verde)}
+  header .mono{font-size:.72rem;color:var(--gris);letter-spacing:.04em}
+
+  /* ---- Héroe ---- */
+  .hero{padding:clamp(48px,9vh,110px) clamp(16px,4vw,48px) clamp(32px,6vh,64px);max-width:1080px;margin:0 auto}
+  .eyebrow{
+    display:inline-block;font-size:.72rem;letter-spacing:.14em;color:var(--gris);
+    border:1px solid var(--linea);padding:6px 12px;border-radius:2px;margin-bottom:28px;
+  }
+  h1{
+    font-weight:900;font-variation-settings:"wdth" 118;
+    font-size:clamp(2.1rem,5.4vw,4.1rem);line-height:1.04;letter-spacing:-.01em;
+    max-width:18ch;
+  }
+  h1 em{font-style:normal;color:var(--verde);}
+  .hero p.sub{
+    margin-top:22px;max-width:52ch;font-size:clamp(1rem,1.4vw,1.15rem);
+    font-weight:300;color:#D8DDD3;
+  }
+
+  /* ---- Manifiesto (firma visual) ---- */
+  .manifiesto{
+    max-width:1080px;margin:12px auto 0;padding:0 clamp(16px,4vw,48px) 8px;position:relative;
+  }
+  .doc{
+    background:var(--papel);color:#20303A;border-radius:3px;
+    box-shadow:0 24px 60px rgba(0,0,0,.35);
+    padding:clamp(20px,3.4vw,40px);position:relative;overflow:hidden;
+  }
+  .doc-head{
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    border-bottom:2px solid #20303A;padding-bottom:12px;margin-bottom:6px;
+  }
+  .doc-head .t{font-weight:800;font-variation-settings:"wdth" 118;letter-spacing:.04em}
+  .doc-head .mono{font-size:.72rem;color:var(--gris-doc)}
+  table{width:100%;border-collapse:collapse}
+  th{
+    text-align:left;font-family:"IBM Plex Mono",monospace;font-weight:500;
+    font-size:.68rem;letter-spacing:.1em;color:var(--gris-doc);
+    padding:14px 10px 8px;border-bottom:1px solid var(--linea-doc);
+  }
+  td{padding:16px 10px;border-bottom:1px solid var(--linea-doc);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.codigo{font-family:"IBM Plex Mono",monospace;font-size:.82rem;font-weight:600;white-space:nowrap;color:var(--tinta)}
+  td.partida{font-weight:800;font-variation-settings:"wdth" 112;font-size:1.02rem;min-width:180px}
+  td.desc{font-weight:300;font-size:.95rem;color:#3A4650;max-width:52ch}
+  td.estado{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--verde-osc);white-space:nowrap}
+
+  .sello-caja{
+    position:absolute;right:clamp(10px,4vw,42px);top:-26px;transform:rotate(6deg);
+    border:3px solid var(--sello);color:var(--sello);border-radius:6px;
+    font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.78rem;letter-spacing:.18em;
+    padding:10px 14px;text-align:center;background:rgba(246,243,234,.92);
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+  }
+  .sello-caja small{display:block;font-size:.6rem;letter-spacing:.22em;font-weight:500}
+
+  /* ---- CTA ---- */
+  .cta{max-width:1080px;margin:0 auto;padding:clamp(36px,6vh,72px) clamp(16px,4vw,48px)}
+  .cta-inner{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--linea);padding-top:36px}
+  .cta h2{font-weight:800;font-variation-settings:"wdth" 112;font-size:clamp(1.2rem,2.4vw,1.6rem);max-width:26ch}
+  .btn{
+    display:inline-block;background:var(--verde);color:#fff;text-decoration:none;
+    font-weight:700;padding:15px 26px;border-radius:3px;letter-spacing:.02em;
+    transition:background .15s ease;
+  }
+  .btn:hover{background:var(--verde-osc)}
+  .btn:focus-visible{outline:3px solid var(--papel);outline-offset:3px}
+  .cta .alt{font-size:.85rem;color:var(--gris);margin-top:10px}
+  .cta .alt a{color:#CFE3D6}
+
+  footer{
+    border-top:1px solid var(--linea);padding:22px clamp(16px,4vw,48px) 34px;
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    font-size:.72rem;color:var(--gris);
+  }
+  footer .mono{letter-spacing:.05em}
+
+  /* Carga sobria */
+  .hero,.manifiesto,.cta{animation:aparecer .6s ease both}
+  .manifiesto{animation-delay:.08s}.cta{animation-delay:.16s}
+  @keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.hero,.manifiesto,.cta{animation:none}}
+
+  @media (max-width:640px){
+    th:nth-child(4),td.estado{display:none}
+    td.partida{min-width:0}
+    .sello-caja{position:static;transform:rotate(-2deg);display:inline-block;margin:0 0 14px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="marca">AICERTIX<span>.</span></div>
+  <div class="mono">AICERTIX E.I.R.L. · RUC 20614997762 · LIMA, PERÚ</div>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="eyebrow mono">PLATAFORMA EN CONSTRUCCIÓN — APERTURA 2026</span>
+    <h1>Aprende a exportar con datos reales y un instructor que <em>nunca duerme</em>.</h1>
+    <p class="sub">AiCertix es formación práctica en comercio exterior para el Perú: cursos autodirigidos con tutor de inteligencia artificial, estadísticas oficiales de aduanas explicadas en tu idioma y simuladores para cotizar, clasificar y documentar tu primer embarque.</p>
+  </section>
+
+  <section class="manifiesto" aria-label="Qué incluirá la plataforma">
+    <div class="doc">
+      <div class="sello-caja" aria-hidden="true">EN TRÁNSITO<small>ZARPE · 2026</small></div>
+      <div class="doc-head">
+        <div class="t">MANIFIESTO DE SERVICIOS</div>
+        <div class="mono">DOC. AICERTIX-2026-0001</div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>PARTIDA</th><th>SERVICIO</th><th>DESCRIPCIÓN</th><th>ESTADO</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="codigo">01.10</td>
+            <td class="partida">Ruta del Exportador Agro</td>
+            <td class="desc">Curso completo, de la partida arancelaria a tu plan de exportación. Ejemplos con arándanos, café y cacao. Certificado verificable.</td>
+            <td class="estado">EN PRODUCCIÓN</td>
+          </tr>
+          <tr>
+            <td class="codigo">02.20</td>
+            <td class="partida">Copiloto de Datos</td>
+            <td class="desc">Pregunta en español sobre exportaciones e importaciones peruanas — volúmenes, destinos, precios, Chancay — con cifras oficiales y fuente citada.</td>
+            <td class="estado">EN PRODUCCIÓN</td>
+          </tr>
+          <tr>
+            <td class="codigo">03.30</td>
+            <td class="partida">Simuladores</td>
+            <td class="desc">Cotizador FOB/CIF, drills de Incoterms® 2020 y checklists documentales por producto y mercado.</td>
+            <td class="estado">EN PRODUCCIÓN</td>
+          </tr>
+          <tr>
+            <td class="codigo">04.40</td>
+            <td class="partida">Importar de China</td>
+            <td class="desc">Segundo carril de la misma plataforma: la ruta del importador, del proveedor al despacho simplificado.</td>
+            <td class="estado">EN LISTA DE ESPERA</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-inner">
+      <h2>Sé de los primeros en zarpar: únete a la lista de espera.</h2>
+      <div>
+        <a class="btn" href="mailto:hola@aicertix.com?subject=Lista%20de%20espera%20AiCertix&body=Hola%2C%20quiero%20unirme%20a%20la%20lista%20de%20espera.%20Me%20interesa%3A%20(exportar%20%2F%20importar)%20%E2%80%94%20Producto%20o%20sector%3A%20">Unirme a la lista de espera</a>
+        <p class="alt">O escríbenos directo: <a href="mailto:hola@aicertix.com" class="mono">hola@aicertix.com</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="mono">© 2026 AICERTIX E.I.R.L. · Todos los derechos reservados</div>
+  <div class="mono">Incoterms® es una marca de la Cámara de Comercio Internacional (ICC) · Términos, Privacidad y Libro de Reclamaciones: disponibles en el lanzamiento</div>
+</footer>
+
+</body>
+</html>
