@@ -3,205 +3,1290 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AiCertix — Formación en comercio exterior para el Perú que exporta</title>
-<meta name="description" content="Cursos de exportación e importación con instructor IA, datos oficiales de aduanas y simuladores prácticos. Muy pronto en el Perú.">
+<title>AiCertix — IA Agentes de Exportación Automatizada desde el Perú</title>
+<meta name="description" content="AiCertix automatiza todo el proceso de exportación desde el Perú hacia China, EE. UU., la UE, Asia y el mundo.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E85D04'/><text x='16' y='23' font-family='Arial' font-size='18' font-weight='800' text-anchor='middle' fill='white'>A</text></svg>">
+<link rel="preload" as="image" href="port-hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fa/css/all.min.css">
 <style>
   :root{
-    --tinta:#0E2A3A;        /* azul tinta aduanera (fondo) */
-    --tinta-2:#123549;
-    --papel:#F6F3EA;        /* papel de documento */
-    --linea:#28495C;        /* líneas del manifiesto sobre tinta */
-    --linea-doc:#C9C2AE;    /* líneas sobre papel */
-    --verde:#1E7A4C;        /* verde agro (acción) */
-    --verde-osc:#155C39;
-    --sello:#B3272F;        /* rojo sello de aduana (solo el sello) */
-    --gris:#8FA6B2;         /* utilitario sobre tinta */
-    --gris-doc:#6E6A5C;     /* utilitario sobre papel */
+    --bg:#080808; --bg-elevated:#111111;
+    --fg:#f5f5f5; --fg-dim:#888888; --fg-mute:#555555;
+    --accent:#E85D04;          /* dark orange — buttons & accents */
+    --accent-deep:#C2410C;
+    --red:#FF2A2A;             /* scan laser + live dot only */
+    --amber:#FFB703;
+    --blue:#38BDF8;
+    --border:rgba(255,255,255,0.08);
+    --border-strong:rgba(255,255,255,0.18);
   }
-  *{box-sizing:border-box;margin:0;padding:0}
+  *{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
   html{scroll-behavior:smooth}
-  body{
-    background:var(--tinta);
-    color:var(--papel);
-    font-family:"Archivo",system-ui,sans-serif;
-    font-variation-settings:"wdth" 100;
-    line-height:1.55;
-    min-height:100vh;
-  }
-  a{color:inherit}
-  .mono{font-family:"IBM Plex Mono",monospace}
+  body{background:var(--bg);color:var(--fg);font-family:'Space Grotesk',sans-serif;overflow-x:hidden}
+  body::-webkit-scrollbar{width:6px}
+  body::-webkit-scrollbar-track{background:#000}
+  body::-webkit-scrollbar-thumb{background:var(--accent)}
+  section[id]{scroll-margin-top:88px}
 
-  /* ---- Cabecera tipo documento ---- */
-  header{
-    border-bottom:1px solid var(--linea);
-    padding:14px clamp(16px,4vw,48px);
-    display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
-  }
-  .marca{font-weight:900;font-variation-settings:"wdth" 125;letter-spacing:.02em;font-size:1.15rem}
-  .marca span{color:var(--verde)}
-  header .mono{font-size:.72rem;color:var(--gris);letter-spacing:.04em}
+  /* header: black glass, fading from blur to 100% transparent below the bar */
+  .site-header{isolation:isolate}
+  .site-header::before{content:'';position:absolute;left:0;right:0;top:0;bottom:-36px;z-index:-1;pointer-events:none;
+    background:linear-gradient(to bottom,rgba(0,0,0,.86) 0%,rgba(0,0,0,.72) 58%,rgba(0,0,0,0) 100%);
+    -webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 58%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 58%,transparent 100%)}
+  .nav-link{color:var(--accent);font-weight:700;transition:color .2s}
+  .nav-link:hover,.nav-link:focus-visible{color:#fff}
 
-  /* ---- Héroe ---- */
-  .hero{padding:clamp(48px,9vh,110px) clamp(16px,4vw,48px) clamp(32px,6vh,64px);max-width:1080px;margin:0 auto}
-  .eyebrow{
-    display:inline-block;font-size:.72rem;letter-spacing:.14em;color:var(--gris);
-    border:1px solid var(--linea);padding:6px 12px;border-radius:2px;margin-bottom:28px;
-  }
-  h1{
-    font-weight:900;font-variation-settings:"wdth" 118;
-    font-size:clamp(2.1rem,5.4vw,4.1rem);line-height:1.04;letter-spacing:-.01em;
-    max-width:18ch;
-  }
-  h1 em{font-style:normal;color:var(--verde);}
-  .hero p.sub{
-    margin-top:22px;max-width:52ch;font-size:clamp(1rem,1.4vw,1.15rem);
-    font-weight:300;color:#D8DDD3;
-  }
+  .font-display{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-variation-settings:"wdth" 92;letter-spacing:-.035em;line-height:.92}
+  .font-mono{font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
 
-  /* ---- Manifiesto (firma visual) ---- */
-  .manifiesto{
-    max-width:1080px;margin:12px auto 0;padding:0 clamp(16px,4vw,48px) 8px;position:relative;
-  }
-  .doc{
-    background:var(--papel);color:#20303A;border-radius:3px;
-    box-shadow:0 24px 60px rgba(0,0,0,.35);
-    padding:clamp(20px,3.4vw,40px);position:relative;overflow:hidden;
-  }
-  .doc-head{
-    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
-    border-bottom:2px solid #20303A;padding-bottom:12px;margin-bottom:6px;
-  }
-  .doc-head .t{font-weight:800;font-variation-settings:"wdth" 118;letter-spacing:.04em}
-  .doc-head .mono{font-size:.72rem;color:var(--gris-doc)}
-  table{width:100%;border-collapse:collapse}
-  th{
-    text-align:left;font-family:"IBM Plex Mono",monospace;font-weight:500;
-    font-size:.68rem;letter-spacing:.1em;color:var(--gris-doc);
-    padding:14px 10px 8px;border-bottom:1px solid var(--linea-doc);
-  }
-  td{padding:16px 10px;border-bottom:1px solid var(--linea-doc);vertical-align:top}
-  tr:last-child td{border-bottom:none}
-  td.codigo{font-family:"IBM Plex Mono",monospace;font-size:.82rem;font-weight:600;white-space:nowrap;color:var(--tinta)}
-  td.partida{font-weight:800;font-variation-settings:"wdth" 112;font-size:1.02rem;min-width:180px}
-  td.desc{font-weight:300;font-size:.95rem;color:#3A4650;max-width:52ch}
-  td.estado{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--verde-osc);white-space:nowrap}
+  /* film grain */
+  body::before{content:'';position:fixed;inset:-10%;pointer-events:none;z-index:9999;opacity:.08;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain .4s steps(1) infinite}
+  @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-5%,-5%)}40%{transform:translate(-10%,5%)}60%{transform:translate(5%,-10%)}80%{transform:translate(-5%,10%)}100%{transform:translate(0,0)}}
 
-  .sello-caja{
-    position:absolute;right:clamp(10px,4vw,42px);top:-26px;transform:rotate(6deg);
-    border:3px solid var(--sello);color:var(--sello);border-radius:6px;
-    font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.78rem;letter-spacing:.18em;
-    padding:10px 14px;text-align:center;background:rgba(246,243,234,.92);
-    box-shadow:0 6px 18px rgba(0,0,0,.25);
-  }
-  .sello-caja small{display:block;font-size:.6rem;letter-spacing:.22em;font-weight:500}
+  /* ===== HERO ===== */
+  .cinematic-frame{position:relative;overflow:hidden;background:linear-gradient(180deg,#0a1622 0%,#10202e 38%,#5a2d0e 72%,#B4530A 100%);isolation:isolate}
+  .cinematic-frame>img{transition:transform .6s cubic-bezier(.4,0,.2,1),filter .4s;will-change:transform}
+  .cinematic-frame:hover>img{filter:brightness(1.05) saturate(1.12) contrast(1.04);animation:cinematic-pan 14s ease-in-out infinite alternate}
+  @keyframes cinematic-pan{0%{transform:scale(1.04)}100%{transform:scale(1.12) translate(-2.5%,-1.5%)}}
+  .vignette::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 38%,rgba(0,0,0,.5) 100%);z-index:3}
 
-  /* ---- CTA ---- */
-  .cta{max-width:1080px;margin:0 auto;padding:clamp(36px,6vh,72px) clamp(16px,4vw,48px)}
-  .cta-inner{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--linea);padding-top:36px}
-  .cta h2{font-weight:800;font-variation-settings:"wdth" 112;font-size:clamp(1.2rem,2.4vw,1.6rem);max-width:26ch}
-  .btn{
-    display:inline-block;background:var(--verde);color:#fff;text-decoration:none;
-    font-weight:700;padding:15px 26px;border-radius:3px;letter-spacing:.02em;
-    transition:background .15s ease;
-  }
-  .btn:hover{background:var(--verde-osc)}
-  .btn:focus-visible{outline:3px solid var(--papel);outline-offset:3px}
-  .cta .alt{font-size:.85rem;color:var(--gris);margin-top:10px}
-  .cta .alt a{color:#CFE3D6}
+  /* RED laser — always on, top → bottom, on every .scan-overlay */
+  .scan-overlay{position:absolute;inset:0;pointer-events:none;z-index:4}
+  .scan-overlay::before{content:'';position:absolute;left:0;right:0;height:2px;top:0;
+    background:linear-gradient(to right,transparent,var(--red) 18%,var(--red) 82%,transparent);
+    box-shadow:0 0 14px var(--red),0 0 44px rgba(255,42,42,.55);
+    animation:scan-line 5.2s linear infinite}
+  @keyframes scan-line{0%{top:0%;opacity:0}6%{opacity:1}94%{opacity:1}100%{top:100%;opacity:0}}
 
-  footer{
-    border-top:1px solid var(--linea);padding:22px clamp(16px,4vw,48px) 34px;
-    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
-    font-size:.72rem;color:var(--gris);
-  }
-  footer .mono{letter-spacing:.05em}
+  .det-tag{position:absolute;z-index:5;max-width:230px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.22);border-left:3px solid var(--red);padding:6px 10px;
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;line-height:1.55;color:rgba(255,255,255,.88);
+    opacity:0;transform:translateY(10px);transition:opacity .35s,transform .35s;pointer-events:none}
+  .det-tag b{color:var(--red);font-weight:700}
+  .det-tag.on{opacity:1;transform:translateY(0)}
+  .scan-chip{position:absolute;top:14px;right:14px;z-index:6;display:flex;align-items:center;gap:8px;
+    background:rgba(0,0,0,.7);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.22);
+    padding:6px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:#fff}
+  .scan-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink-fast .7s steps(2) infinite}
+  @keyframes blink-fast{50%{opacity:0}}
 
-  /* Carga sobria */
-  .hero,.manifiesto,.cta{animation:aparecer .6s ease both}
-  .manifiesto{animation-delay:.08s}.cta{animation-delay:.16s}
-  @keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  @media (prefers-reduced-motion:reduce){.hero,.manifiesto,.cta{animation:none}}
+  /* live dot — RED pulse */
+  .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);
+    box-shadow:0 0 0 0 rgba(255,42,42,.7);animation:live-pulse 1.8s ease-out infinite}
+  @keyframes live-pulse{0%{box-shadow:0 0 0 0 rgba(255,42,42,.7)}70%{box-shadow:0 0 0 14px rgba(255,42,42,0)}100%{box-shadow:0 0 0 0 rgba(255,42,42,0)}}
 
-  @media (max-width:640px){
-    th:nth-child(4),td.estado{display:none}
-    td.partida{min-width:0}
-    .sello-caja{position:static;transform:rotate(-2deg);display:inline-block;margin:0 0 14px}
-  }
+  /* ===== BUTTONS — dark orange, always white text ===== */
+  .btn-primary{background:var(--accent);color:#fff;padding:.875rem 1.5rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;font-size:.8125rem;display:inline-flex;align-items:center;gap:.5rem;
+    border:1px solid var(--accent);cursor:pointer;transition:all .25s}
+  .btn-primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff;
+    transform:translate(-2px,-2px);box-shadow:4px 4px 0 rgba(232,93,4,.4)}
+  .btn-outline{border:1px solid var(--border-strong);background:transparent;color:#fff;padding:.875rem 1.5rem;
+    font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:.8125rem;display:inline-flex;
+    align-items:center;gap:.5rem;cursor:pointer;transition:all .25s}
+  .btn-outline:hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:translate(-2px,-2px);box-shadow:4px 4px 0 rgba(232,93,4,.35)}
+  .accent-glow{text-shadow:0 0 32px rgba(232,93,4,.45)}
+
+  .section-label{display:inline-flex;align-items:center;gap:.75rem;font-family:'JetBrains Mono',monospace;
+    font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+  .section-label::before{content:'';width:36px;height:1px;background:currentColor}
+
+  /* marquee */
+  .marquee-wrap{overflow:hidden;white-space:nowrap;background:#FFFFFF;color:#000000;padding-block:1.25rem}
+  .marquee-track.font-display{font-weight:400}
+  .marquee-track{display:inline-flex;animation:marquee 38s linear infinite;align-items:center}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+
+  /* ===== BENTO ===== */
+  .bx{background:var(--bg-elevated);border:1px solid var(--border);padding:1.75rem;transition:border-color .3s,transform .3s;opacity:0;transform:translateY(18px)}
+  .bx.in{opacity:1;transform:none}
+  .bx:hover{border-color:var(--accent)}
+  .bx-num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(2.2rem,3.4vw,3.4rem);letter-spacing:-.03em;line-height:1}
+  .bx-lab{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-dim)}
+  .bx-check{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:#cfcfcf;padding:.3rem 0}
+  .bx-badge{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;border:1px solid var(--border-strong);padding:5px 10px;color:rgba(255,255,255,.75)}
+
+  /* corridors */
+  .port-card{background:var(--bg-elevated);border:1px solid var(--border);padding:1.5rem;cursor:pointer;position:relative;overflow:hidden;
+    transition:transform .5s cubic-bezier(.4,0,.2,1),opacity .4s,border-color .3s,filter .4s}
+  .port-card:hover{border-color:var(--amber);transform:translateY(-4px)}
+  .port-card .go{position:absolute;right:1.25rem;bottom:1.15rem;opacity:0;transition:opacity .25s;color:var(--accent)}
+  .port-card:hover .go{opacity:1}
+  .port-card::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--accent);width:0;transition:width .5s}
+  .port-card:hover::after{width:100%}
+  .port-pick{display:flex;flex-direction:column;align-items:flex-start;gap:.3rem;text-align:left;padding:.9rem 1rem;background:var(--bg-elevated);
+    border:1px solid var(--border);color:var(--fg);cursor:pointer;transition:border-color .25s,background .25s,transform .25s}
+  .port-pick>span:first-child{color:var(--fg-dim)}
+  .port-pick:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+  .port-pick.on{border-color:var(--accent);background:rgba(232,93,4,.12)}
+  .port-pick.on>span:first-child{color:var(--accent)}
+  .port-pick:focus-visible,.filter-chip:focus-visible,.port-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .filter-chip{padding:.625rem 1.125rem;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--fg-dim);
+    font-size:.8125rem;font-weight:500;letter-spacing:.02em;transition:all .25s;cursor:pointer;white-space:nowrap}
+  .filter-chip:hover{border-color:var(--fg);color:var(--fg)}
+  .filter-chip.active{background:var(--fg);color:#000;border-color:var(--fg)}
+
+  /* article */
+  .article-body p{font-size:1.0625rem;line-height:1.75;color:#cfcfcf;margin-bottom:1.5rem}
+  .article-body p strong{color:var(--fg)}
+  .article-body p em{color:var(--accent);font-style:italic}
+  .article-body h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.7rem;letter-spacing:-.025em;margin:3rem 0 1rem}
+  .article-body h3::before{content:'§ ';color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:400}
+  .drop-cap::first-letter{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:5.5rem;float:left;line-height:.82;padding-right:.75rem;padding-top:.5rem;color:var(--accent)}
+  .pull-quote{border-left:3px solid var(--accent);padding:.5rem 0 .5rem 1.75rem;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;
+    font-size:1.6rem;line-height:1.35;letter-spacing:-.025em;margin:2.5rem 0;color:var(--fg)}
+
+  /* manifest */
+  .mani-shell{background:#0a0a0a;border:1px solid var(--border)}
+  .mani-progress{height:4px;background:rgba(255,255,255,.1);position:relative}
+  .mani-progress i{position:absolute;inset:0;width:64%;background:var(--accent)}
+  .mani-progress i::after{content:'';position:absolute;right:-6px;top:-4px;width:12px;height:12px;background:var(--accent);border-radius:50%;box-shadow:0 0 14px var(--accent)}
+  .mani-doc{display:flex;align-items:center;justify-content:space-between;padding:9px 2px;border-bottom:1px solid var(--border);font-size:.8rem;color:#cfcfcf;opacity:0;transform:translateX(-10px)}
+  .mani-doc.in{opacity:1;transform:none;transition:all .5s}
+
+  /* white form section */
+  .light-sec{--fg:#000000;--fg-dim:#4a4a4a;--fg-mute:#8a8a8a;--border:rgba(0,0,0,.16);--border-strong:rgba(0,0,0,.32);background:#FFFFFF;color:#000000}
+  .light-sec select.nl-input option{background:#fff;color:#000}
+  .light-sec textarea.nl-input{background:#fff;color:#000;border:1px solid var(--border);border-bottom-width:2px;padding:.8rem .9rem}
+  .light-sec textarea.nl-input:focus{border-color:var(--accent)}
+  .light-sec .nl-input.invalid{border-color:var(--red)}
+  .attach-btn{display:inline-flex;align-items:center;gap:.5rem;border:1px dashed var(--border-strong);padding:.6rem .9rem;font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);cursor:pointer;transition:border-color .2s,color .2s}
+  .attach-btn:hover,.attach-btn:focus-within{border-color:var(--accent);color:var(--accent)}
+
+  /* form */
+  .nl-input{background:transparent;border:none;border-bottom:2px solid var(--border);padding:1.05rem 0;color:var(--fg);
+    font-size:1.15rem;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;width:100%;outline:none;transition:border-color .3s;letter-spacing:-.01em}
+  .nl-input::placeholder{color:var(--fg-mute)}
+  .nl-input:focus{border-color:var(--accent)}
+  .nl-input.invalid{border-color:var(--red)}
+  select.nl-input{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23E85D04' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .2rem center}
+  select.nl-input option,textarea.nl-input{background:#111;color:#f5f5f5}
+  textarea.nl-input{resize:vertical;min-height:90px;font-size:1rem;font-family:'Space Grotesk',sans-serif;font-weight:400}
+  @keyframes formflash{50%{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 44px rgba(232,93,4,.28)}}
+  .form-flash{animation:formflash 1s ease 2}
+
+  .stat-cell{border-right:1px solid var(--border);padding:1.5rem}
+  .stat-cell:last-child{border-right:none}
+  .no-scrollbar::-webkit-scrollbar{display:none}
+  .no-scrollbar{scrollbar-width:none}
+
+  .scroll-progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:100;width:0}
+  .back-to-top{position:fixed;bottom:24px;left:24px;width:48px;height:48px;background:var(--bg-elevated);border:1px solid var(--border-strong);
+    color:#fff;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:all .3s;z-index:50;cursor:pointer}
+  .back-to-top.visible{opacity:1;pointer-events:auto}
+  .back-to-top:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  /* ===== CHAT (dark) ===== */
+  .chat-fab{position:fixed;right:22px;bottom:22px;z-index:80;width:58px;height:58px;border-radius:50%;background:var(--accent);color:#fff;
+    display:flex;align-items:center;justify-content:center;border:2px solid #000;box-shadow:0 10px 34px rgba(232,93,4,.4);cursor:pointer;transition:transform .2s}
+  .chat-fab:hover{transform:translate(-2px,-2px)}
+  .chat-fab .badge-dot{position:absolute;top:-2px;right:-2px;width:15px;height:15px;border-radius:50%;background:var(--red);border:2px solid #000}
+  .chat-fab .i-xc{display:none}
+  .chat-attn{position:fixed;right:92px;bottom:30px;z-index:79;background:#161616;border:1px solid var(--border-strong);
+    padding:11px 34px 11px 14px;font-size:13px;font-weight:600;max-width:240px;opacity:0;transform:translateY(8px);pointer-events:none;transition:.3s}
+  .chat-attn.show{opacity:1;transform:none;pointer-events:auto}
+  .chat-attn button{position:absolute;top:5px;right:5px;width:22px;height:22px;color:var(--fg-dim)}
+  .chat{position:fixed;right:22px;bottom:92px;z-index:81;width:min(390px,calc(100vw - 32px));height:min(560px,calc(100dvh - 130px));
+    background:#0d0d0d;border:1px solid var(--border-strong);display:flex;flex-direction:column;overflow:hidden;
+    opacity:0;transform:translateY(14px) scale(.98);pointer-events:none;transition:.28s cubic-bezier(.2,1.2,.4,1);transform-origin:bottom right}
+  .chat.open{opacity:1;transform:none;pointer-events:auto}
+  .c-head{background:#000;border-bottom:1px solid var(--border);padding:13px 15px;display:flex;align-items:center;gap:9px}
+  .c-av{width:36px;height:36px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:18px;flex:none}
+  .c-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;line-height:1.1;color:#fff}
+  .c-role{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;color:var(--fg-dim);text-transform:uppercase}
+  .c-log{flex:1;overflow-y:auto;padding:15px 13px;display:flex;flex-direction:column}
+  .c-log::-webkit-scrollbar{width:5px}.c-log::-webkit-scrollbar-thumb{background:#222}
+  .msg{display:flex;gap:8px;margin-bottom:12px;align-items:flex-end}
+  .bavatar{width:22px;height:22px;flex:none;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:12px}
+  .bubble{max-width:82%;padding:10px 13px;font-size:13.5px;line-height:1.5}
+  .msg.bot .bubble{background:#181818;border:1px solid var(--border);color:#e8e8e8;border-bottom-left-radius:2px}
+  .msg.user{justify-content:flex-end}
+  .msg.user .bubble{background:var(--accent);color:#fff;border-bottom-right-radius:2px}
+  .bubble b{font-weight:700;color:#fff}
+  .typing{display:inline-flex;gap:4px;padding:3px 1px}
+  .typing span{width:6px;height:6px;border-radius:50%;background:var(--fg-dim);animation:tp 1s infinite}
+  .typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+  @keyframes tp{40%{transform:translateY(-5px);background:var(--accent)}}
+  .c-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 13px 10px}
+  .c-chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;border:1px solid var(--border-strong);background:transparent;color:#ddd;padding:6px 11px;cursor:pointer;transition:.15s}
+  .c-chip:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .c-in{display:flex;border-top:1px solid var(--border);background:#000}
+  .c-in input{flex:1;border:none;outline:none;background:transparent;padding:14px;font-size:13.5px;color:#fff;font-family:'Space Grotesk',sans-serif;min-width:0}
+  .c-send{width:50px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer}
+  .c-send:hover{background:var(--accent-deep)}
+  /* mic button */
+  .c-mic{width:44px;background:transparent;color:var(--fg-dim);display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer;transition:.2s}
+  .c-mic:hover{color:#fff}
+  .c-mic.listening{color:#fff;background:var(--red);animation:micpulse 1.2s infinite}
+  @keyframes micpulse{50%{box-shadow:inset 0 0 24px rgba(255,42,42,.5)}}
+  /* voice selector */
+  .c-voice{max-width:118px;background:transparent;color:#fff;border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:9px;padding:4px 2px;outline:none;cursor:pointer}
+  .c-voice option{background:#111;color:#fff}
+
+  /* modal */
+  .modal{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:20px}
+  .modal.open{display:grid}
+  .m-back{position:absolute;inset:0;background:rgba(0,0,0,.75)}
+  .m-panel{position:relative;width:min(700px,100%);max-height:82vh;background:#101010;border:1px solid var(--border-strong);display:flex;flex-direction:column;overflow:hidden;animation:mpop .3s cubic-bezier(.2,1.4,.4,1)}
+  @keyframes mpop{from{opacity:0;transform:translateY(16px)}}
+  .m-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--border)}
+  .m-x{width:36px;height:36px;border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:.2s}
+  .m-x:hover{background:var(--accent);border-color:var(--accent)}
+  .m-body{padding:24px;overflow:auto}
+  .m-body h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:20px 0 8px}
+  .m-body h4:first-child{margin-top:0}
+  .m-body p{font-size:14px;line-height:1.7;color:#cfcfcf;margin-bottom:10px}
+  .m-body b{color:#fff}
+
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}body::before{display:none}}
 </style>
+<link rel="stylesheet" href="assets/tailwind.css">
 </head>
 <body>
 
-<header>
-  <div class="marca">AICERTIX<span>.</span></div>
-  <div class="mono">AICERTIX E.I.R.L. · RUC 20614997762 · LIMA, PERÚ</div>
+<div class="scroll-progress-bar" id="scrollProgress"></div>
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-[1600px] mx-auto px-6 py-3.5 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3">
+      <div class="w-9 h-9 flex items-center justify-center font-display text-xl" style="background:var(--accent);color:#fff">A</div>
+      <div class="flex flex-col leading-none">
+        <span class="font-display text-xl tracking-tight text-white">AiCertix</span>
+        <span class="text-[9px] font-mono tracking-[0.32em] mt-1" style="color:var(--accent)">IA AGENTES DE EXPORTACIONES</span>
+        <span class="text-[8px] font-mono tracking-widest text-white mt-0.5">Nuevo Sistema · Exportación Automatizada</span>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
+      <a href="#operacion" class="nav-link flex items-center gap-1.5"><span class="font-mono text-xs">01</span><span data-i18n="nav.op"></span></a>
+      <a href="#corredores" class="nav-link flex items-center gap-1.5"><span class="font-mono text-xs">02</span><span data-i18n="nav.corr"></span></a>
+      <a href="#proceso" class="nav-link flex items-center gap-1.5"><span class="font-mono text-xs">03</span><span data-i18n="nav.proc"></span></a>
+      <a href="#cotizar" class="nav-link flex items-center gap-1.5"><span class="font-mono text-xs">04</span><span data-i18n="nav.quote"></span></a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <div class="hidden sm:flex items-center border border-[var(--border)] font-mono text-[11px] font-bold lang-sw">
+        <button data-lang="es" class="px-3 py-2 text-white" style="background:var(--accent)">ES</button>
+        <button data-lang="en" class="px-3 py-2 text-[var(--fg-dim)]">EN</button>
+      </div>
+      <a href="#cotizar" class="btn-primary text-xs hidden md:inline-flex"><span data-i18n="nav.cta"></span> <i class="fas fa-arrow-right text-[10px]"></i></a>
+      <button class="lg:hidden w-10 h-10 border border-[var(--border)] text-white" id="burger"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="lg:hidden hidden border-t border-[var(--border)] bg-black/95 px-6 py-4 flex-col gap-1" id="mmenu">
+    <a href="#operacion" class="nav-link py-2.5 border-b border-[var(--border)]" data-i18n="nav.op"></a>
+    <a href="#corredores" class="nav-link py-2.5 border-b border-[var(--border)]" data-i18n="nav.corr"></a>
+    <a href="#proceso" class="nav-link py-2.5 border-b border-[var(--border)]" data-i18n="nav.proc"></a>
+    <a href="#cotizar" class="nav-link py-2.5" data-i18n="nav.quote"></a>
+    <a href="#cotizar" class="btn-primary text-xs mt-3 justify-center"><span data-i18n="nav.cta"></span></a>
+    <div class="flex items-center self-start border border-[var(--border)] font-mono text-[11px] font-bold mt-4 lang-sw">
+      <button data-lang="es" class="px-4 py-2.5 text-white" style="background:var(--accent)">ES</button>
+      <button data-lang="en" class="px-4 py-2.5 text-[var(--fg-dim)]">EN</button>
+    </div>
+  </div>
 </header>
 
-<main>
-  <section class="hero">
-    <span class="eyebrow mono">PLATAFORMA EN CONSTRUCCIÓN — APERTURA 2026</span>
-    <h1>Aprende a exportar con datos reales y un instructor que <em>nunca duerme</em>.</h1>
-    <p class="sub">AiCertix es formación práctica en comercio exterior para el Perú: cursos autodirigidos con tutor de inteligencia artificial, estadísticas oficiales de aduanas explicadas en tu idioma y simuladores para cotizar, clasificar y documentar tu primer embarque.</p>
-  </section>
-
-  <section class="manifiesto" aria-label="Qué incluirá la plataforma">
-    <div class="doc">
-      <div class="sello-caja" aria-hidden="true">EN TRÁNSITO<small>ZARPE · 2026</small></div>
-      <div class="doc-head">
-        <div class="t">MANIFIESTO DE SERVICIOS</div>
-        <div class="mono">DOC. AICERTIX-2026-0001</div>
+<!-- ============ HERO (tuned for port-hero.jpg) ============ -->
+<section id="hero" class="pt-24 pb-10 px-6">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="flex items-center justify-between mb-5 text-[11px] font-mono uppercase tracking-widest text-[var(--fg-dim)]">
+      <div class="flex items-center gap-5">
+        <span class="flex items-center gap-2 text-white"><span class="live-dot"></span><span data-i18n="hero.live"></span></span>
+        <span class="hidden md:inline">PECLL · PERÚ</span>
+        <span class="md:hidden">11°33'36"S · 77°16'12"W</span>
       </div>
-      <table>
-        <thead>
-          <tr><th>PARTIDA</th><th>SERVICIO</th><th>DESCRIPCIÓN</th><th>ESTADO</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="codigo">01.10</td>
-            <td class="partida">Ruta del Exportador Agro</td>
-            <td class="desc">Curso completo, de la partida arancelaria a tu plan de exportación. Ejemplos con arándanos, café y cacao. Certificado verificable.</td>
-            <td class="estado">EN PRODUCCIÓN</td>
-          </tr>
-          <tr>
-            <td class="codigo">02.20</td>
-            <td class="partida">Copiloto de Datos</td>
-            <td class="desc">Pregunta en español sobre exportaciones e importaciones peruanas — volúmenes, destinos, precios, Chancay — con cifras oficiales y fuente citada.</td>
-            <td class="estado">EN PRODUCCIÓN</td>
-          </tr>
-          <tr>
-            <td class="codigo">03.30</td>
-            <td class="partida">Simuladores</td>
-            <td class="desc">Cotizador FOB/CIF, drills de Incoterms® 2020 y checklists documentales por producto y mercado.</td>
-            <td class="estado">EN PRODUCCIÓN</td>
-          </tr>
-          <tr>
-            <td class="codigo">04.40</td>
-            <td class="partida">Importar de China</td>
-            <td class="desc">Segundo carril de la misma plataforma: la ruta del importador, del proveedor al despacho simplificado.</td>
-            <td class="estado">EN LISTA DE ESPERA</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="hidden md:flex items-center gap-5">
+        <span><span data-i18n="hero.ports"></span> · <span class="text-white">8</span></span>
+        <span data-i18n="hero.ocean"></span>
+        <span style="color:var(--accent)" data-i18n="hero.today"></span>
+      </div>
     </div>
-  </section>
 
-  <section class="cta">
-    <div class="cta-inner">
-      <h2>Sé de los primeros en zarpar: únete a la lista de espera.</h2>
+    <div class="cinematic-frame vignette relative min-h-[620px] sm:min-h-[560px] lg:min-h-0 lg:aspect-video group" id="heroFrame" data-scan>
+      <img src="port-hero.jpg" alt="" data-i18n-alt="hero.alt" width="1672" height="941"
+           class="w-full h-full object-cover absolute inset-0" style="object-position:center 55%"
+           fetchpriority="high" onerror="this.remove()">
+      <div class="scan-overlay"></div>
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/10 z-[2]"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/10 to-transparent z-[2]"></div>
+
+      <div class="scan-chip"><span class="dot"></span>SCAN <span class="scan-pct">000</span>% · OBJ <span class="scan-obj">00</span><span class="scan-done" style="display:none;color:var(--accent)">✓ IA</span></div>
+
+      <!-- tags anchored to real features: cranes / containers / bridge / wake -->
+      <div class="det-tag hidden sm:block" style="left:26%;top:16%"><span data-i18n="tag1a"></span><br><b data-i18n="tag1b"></b></div>
+      <div class="det-tag hidden sm:block" style="left:49%;top:47%"><span data-i18n="tag2a"></span><br><b data-i18n="tag2b"></b></div>
+      <div class="det-tag hidden md:block" style="left:65%;top:38%"><span data-i18n="tag3a"></span><br><b data-i18n="tag3b"></b></div>
+      <div class="det-tag hidden sm:block" style="left:80%;top:66%"><span data-i18n="tag4a"></span><br><b data-i18n="tag4b"></b></div>
+
+      <div class="absolute top-0 left-0 right-0 p-5 md:p-7 md:pr-56 flex items-start justify-between z-[5]">
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <span class="text-[10px] font-bold px-2 py-1 uppercase tracking-wider font-mono text-white" style="background:var(--accent)" data-i18n="f.badge1"></span>
+          <span class="hidden sm:inline text-[10px] font-mono text-white/90 border border-white/30 px-2 py-1 backdrop-blur bg-black/30">40 TEU · REEFER · GRÚA 07</span>
+          <span class="hidden md:inline text-[10px] font-mono text-white/70 border border-white/20 px-2 py-1 backdrop-blur bg-black/30">AEO / OEA · ISO 28000</span>
+        </div>
+        <div class="hidden md:flex items-center gap-4 text-[10px] font-mono text-white/70">
+          <span><i class="fas fa-anchor mr-1.5" style="color:var(--accent)"></i>PECHY → CNSHA</span>
+          <span><i class="far fa-clock mr-1"></i><span data-i18n="f.dep"></span> 21:00 UTC</span>
+        </div>
+      </div>
+
+      <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 lg:p-14 z-[5]">
+        <div class="max-w-3xl">
+          <div class="text-[11px] font-mono uppercase tracking-widest mb-4 flex items-center gap-2" style="color:var(--amber)">
+            <span class="w-8 h-px" style="background:var(--amber)"></span><span data-i18n="hero.kicker"></span>
+          </div>
+          <h1 class="font-display text-4xl md:text-6xl lg:text-7xl text-white mb-5 accent-glow" style="text-wrap:balance" data-i18n="hero.h1"></h1>
+          <p class="text-white/80 text-base md:text-lg lg:text-xl max-w-2xl mb-7 leading-relaxed font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]" data-i18n="hero.sub"></p>
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#cotizar" class="btn-primary"><i class="fas fa-paper-plane text-[10px]"></i><span data-i18n="hero.b1"></span></a>
+            <a href="#corredores" class="btn-outline"><i class="fas fa-anchor text-[10px]"></i><span data-i18n="hero.b2"></span></a>
+            <span class="hidden md:flex items-center gap-2 ml-2 text-[10px] font-mono uppercase tracking-widest text-white/50">
+              <span class="live-dot" style="width:6px;height:6px"></span><span data-i18n="hero.hint"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 mt-px border-y border-[var(--border)] bg-black">
+      <div class="stat-cell"><div class="bx-lab mb-1.5" data-i18n="s1l"></div><div class="font-display text-2xl md:text-3xl">−72%</div></div>
+      <div class="stat-cell"><div class="bx-lab mb-1.5" data-i18n="s2l"></div><div class="font-display text-2xl md:text-3xl">99.4%</div></div>
+      <div class="stat-cell"><div class="bx-lab mb-1.5" data-i18n="s3l"></div><div class="font-display text-2xl md:text-3xl">48 h</div></div>
+      <div class="stat-cell"><div class="bx-lab mb-1.5" data-i18n="s4l"></div><div class="font-display text-2xl md:text-3xl" style="color:var(--accent)">24/7</div></div>
+    </div>
+    <p class="mt-3 font-mono text-[10px] uppercase tracking-widest text-[var(--fg-mute)]" data-i18n="s.note"></p>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap"><div class="marquee-track font-display text-xl md:text-2xl" id="marquee"></div></div>
+
+<!-- ============ 01 · BENTO ============ -->
+<section id="operacion" class="px-6 py-16 md:py-24">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="mb-10 max-w-3xl">
+      <div class="section-label mb-4" data-i18n="op.label"></div>
+      <h2 class="font-display text-5xl md:text-6xl lg:text-7xl" style="text-wrap:balance"><span data-i18n="op.h2a"></span> <span style="color:var(--accent)" data-i18n="op.h2b"></span></h2>
+      <p class="text-[var(--fg-dim)] mt-4 max-w-xl text-base" data-i18n="op.sub"></p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+      <div class="bx md:col-span-4 md:row-span-2 flex flex-col">
+        <div class="bx-lab mb-3" style="color:var(--accent)">OPERACIÓN · PERÚ</div>
+        <h3 class="font-display text-3xl md:text-4xl mb-4" data-i18n="b.a.h"></h3>
+        <p class="text-[var(--fg-dim)] text-base md:text-lg mb-6 max-w-xl" data-i18n="b.a.p"></p>
+        <div class="space-y-1 mb-8">
+          <div class="bx-check"><i class="fas fa-check text-[10px]" style="color:var(--accent)"></i><span data-i18n="b.a.li1"></span></div>
+          <div class="bx-check"><i class="fas fa-check text-[10px]" style="color:var(--accent)"></i><span data-i18n="b.a.li2"></span></div>
+          <div class="bx-check"><i class="fas fa-check text-[10px]" style="color:var(--accent)"></i><span data-i18n="b.a.li3"></span></div>
+        </div>
+        <a href="#proceso" class="btn-outline text-xs mt-auto self-start"><span data-i18n="b.a.cta"></span> <i class="fas fa-arrow-right text-[10px]"></i></a>
+      </div>
+
+      <div class="bx md:col-span-2">
+        <div class="bx-num"><span data-count="8">0</span></div>
+        <div class="bx-lab mt-3" data-i18n="b.b.l"></div>
+      </div>
+      <div class="bx md:col-span-2">
+        <div class="bx-num">48<span class="text-[var(--accent)]">h</span></div>
+        <div class="bx-lab mt-3" data-i18n="b.c.l"></div>
+      </div>
+
+      <div class="bx md:col-span-2">
+        <div class="bx-lab mb-3" style="color:var(--accent)"><i class="fas fa-temperature-low mr-1.5"></i><span data-i18n="b.e.t"></span></div>
+        <div class="bx-num text-4xl mb-2">2–8 °C</div>
+        <p class="text-sm text-[var(--fg-dim)]" data-i18n="b.e.p"></p>
+        <div class="bx-lab mt-4" style="color:var(--blue)">±0.3 °C · REEFER</div>
+      </div>
+      <div class="bx md:col-span-2">
+        <div class="bx-lab mb-3" style="color:var(--accent)"><i class="fas fa-shield-halved mr-1.5"></i><span data-i18n="b.f.t"></span></div>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="bx-badge">AEO / OEA</span><span class="bx-badge">ISO 28000</span><span class="bx-badge">SUNAT</span><span class="bx-badge">OFAC · UE · ONU</span>
+        </div>
+        <p class="text-sm text-[var(--fg-dim)]" data-i18n="b.f.p"></p>
+      </div>
+
+      <div class="bx md:col-span-2">
+        <div class="bx-lab mb-3" style="color:var(--accent)"><i class="fas fa-file-lines mr-1.5"></i><span data-i18n="b.d.t"></span></div>
+        <div id="bentoDocs" class="grid grid-cols-1 gap-0.5"></div>
+      </div>
+      <div class="bx md:col-span-2">
+        <div class="bx-num" style="color:var(--blue)">0</div>
+        <div class="bx-lab mt-3 mb-3" data-i18n="b.h.l"></div>
+        <p class="text-sm text-[var(--fg-dim)]" data-i18n="b.h.p"></p>
+      </div>
+
+      <div class="bx md:col-span-4">
+        <div class="flex items-center gap-2.5 mb-3">
+          <span class="live-dot"></span><span class="bx-lab" style="color:var(--accent)" data-i18n="b.g.t"></span>
+        </div>
+        <p class="text-sm text-[var(--fg-dim)] mb-5 max-w-lg" data-i18n="b.g.p"></p>
+        <svg viewBox="0 0 640 70" class="w-full max-w-xl" aria-hidden="true">
+          <line x1="30" y1="35" x2="610" y2="35" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+          <circle cx="30" cy="35" r="6" fill="#E85D04"/><circle cx="30" cy="35" r="6" fill="none" stroke="#E85D04"><animate attributeName="r" values="6;16" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0" dur="1.8s" repeatCount="indefinite"/></circle>
+          <circle cx="200" cy="35" r="4" fill="#555"/><circle cx="370" cy="35" r="4" fill="#555"/>
+          <circle cx="610" cy="35" r="5" fill="#FFB703"/>
+          <text x="30" y="16" text-anchor="middle" fill="#f5f5f5" font-family="JetBrains Mono" font-size="11" font-weight="700">PECHY</text>
+          <text x="30" y="60" text-anchor="middle" fill="#888" font-family="JetBrains Mono" font-size="9">CHANCAY</text>
+          <text x="610" y="16" text-anchor="middle" fill="#f5f5f5" font-family="JetBrains Mono" font-size="11" font-weight="700">CNSHA</text>
+          <text x="610" y="60" text-anchor="middle" fill="#888" font-family="JetBrains Mono" font-size="9">SHANGHÁI</text>
+          <text x="320" y="28" text-anchor="middle" fill="#E85D04" font-family="JetBrains Mono" font-size="10" font-weight="700">24 DÍAS · PACÍFICO</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · CORRIDORS ============ -->
+<section id="corredores" class="px-6 py-16 md:py-24 border-t border-[var(--border)]">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
       <div>
-        <a class="btn" href="mailto:hola@aicertix.com?subject=Lista%20de%20espera%20AiCertix&body=Hola%2C%20quiero%20unirme%20a%20la%20lista%20de%20espera.%20Me%20interesa%3A%20(exportar%20%2F%20importar)%20%E2%80%94%20Producto%20o%20sector%3A%20">Unirme a la lista de espera</a>
-        <p class="alt">O escríbenos directo: <a href="mailto:hola@aicertix.com" class="mono">hola@aicertix.com</a></p>
+        <div class="section-label mb-4" data-i18n="corr.label"></div>
+        <h2 class="font-display text-5xl md:text-6xl lg:text-7xl" style="text-wrap:balance"><span data-i18n="corr.h2a"></span> <span style="color:var(--accent)" data-i18n="corr.h2b"></span></h2>
+        <p class="text-[var(--fg-dim)] mt-4 max-w-xl text-base" data-i18n="corr.sub"></p>
+      </div>
+      <div class="font-mono text-xs text-[var(--fg-dim)]"><span data-i18n="corr.orig"></span> <span class="text-white" id="origLabel"></span></div>
+    </div>
+
+    <div class="bx-lab mb-3" style="color:var(--accent)"><i class="fas fa-anchor mr-1.5"></i><span data-i18n="corr.origT"></span></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-10" id="portGrid" role="group"></div>
+    <div class="bx-lab mb-3" style="color:var(--accent)"><i class="fas fa-ship mr-1.5"></i><span data-i18n="corr.destT"></span></div>
+    <div class="flex gap-2 overflow-x-auto pb-3 mb-8 no-scrollbar" id="corrFilters"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="corrGrid"></div>
+    <p class="mt-8 text-xs font-mono text-[var(--fg-dim)]" data-i18n="corr.hint"></p>
+  </div>
+</section>
+
+<!-- ============ SHIP BAND (container-ship.jpg, red scan) ============ -->
+<section class="px-6 pb-16 md:pb-24" aria-labelledby="shipTitle">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="cinematic-frame vignette relative aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9] group" style="background:#0c1a22" data-scan>
+      <img src="container-ship.jpg" alt="" data-i18n-alt="ship.alt" width="1904" height="986" loading="lazy"
+           class="w-full h-full object-cover absolute inset-0 object-[30%_50%] sm:object-center" onerror="this.remove()">
+      <div class="scan-overlay"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent z-[2]"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-transparent z-[2]"></div>
+
+      <div class="scan-chip"><span class="dot"></span>SCAN <span class="scan-pct">000</span>% · OBJ <span class="scan-obj">00</span><span class="scan-done" style="display:none;color:var(--accent)">✓ IA</span></div>
+
+      <div class="det-tag left-[6%] top-[12%] sm:left-[34%] sm:top-[26%]"><span data-i18n="ship.t1a"></span><br><b data-i18n="ship.t1b"></b></div>
+      <div class="det-tag hidden sm:block" style="left:66%;top:68%"><span data-i18n="ship.t2a"></span><br><b data-i18n="ship.t2b"></b></div>
+
+      <div class="absolute top-3 left-3 w-3 h-3 border-t border-l border-white/40 z-[5]"></div>
+      <div class="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-white/40 z-[5]"></div>
+      <div class="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-white/40 z-[5]"></div>
+
+      <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8 lg:p-10 z-[5]">
+        <div class="text-[11px] font-mono uppercase tracking-widest mb-3 flex items-center gap-2" style="color:var(--amber)">
+          <span class="w-8 h-px" style="background:var(--amber)"></span><span data-i18n="ship.kicker"></span>
+        </div>
+        <h2 id="shipTitle" class="font-display text-3xl md:text-4xl lg:text-5xl text-white max-w-sm md:max-w-none" data-i18n="ship.h"></h2>
       </div>
     </div>
-  </section>
-</main>
+  </div>
+</section>
 
-<footer>
-  <div class="mono">© 2026 AICERTIX E.I.R.L. · Todos los derechos reservados</div>
-  <div class="mono">Incoterms® es una marca de la Cámara de Comercio Internacional (ICC) · Términos, Privacidad y Libro de Reclamaciones: disponibles en el lanzamiento</div>
+<!-- ============ 03 · PROCESS ============ -->
+<section id="proceso" class="px-6 py-16 md:py-24 border-t border-[var(--border)]">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="mb-12 max-w-3xl">
+      <div class="section-label mb-4" data-i18n="proc.label"></div>
+      <h2 class="font-display text-5xl md:text-6xl lg:text-7xl mb-5" style="text-wrap:balance"><span data-i18n="proc.h2a"></span> <span style="color:var(--accent)" data-i18n="proc.h2b"></span></h2>
+      <p class="text-[var(--fg-dim)] text-base md:text-lg" data-i18n="proc.sub"></p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16">
+      <div class="lg:sticky lg:top-24 lg:self-start">
+        <div class="mani-shell">
+          <div class="flex items-center justify-between px-5 py-4 border-b border-[var(--border)]">
+            <span class="flex items-center gap-2.5 text-[10px] font-mono uppercase tracking-widest text-white"><span class="live-dot"></span><span data-i18n="m.title"></span></span>
+            <span class="font-mono text-[10px] text-[var(--fg-dim)]">AIX · <span data-i18n="m.id"></span></span>
+          </div>
+          <div class="px-5 py-5">
+            <div class="flex items-baseline gap-3 flex-wrap mb-1">
+              <span class="font-display text-3xl md:text-4xl">PECLL <span style="color:var(--accent)">→</span> CNSHA</span>
+            </div>
+            <div class="font-mono text-[10px] uppercase tracking-widest text-[var(--fg-dim)] mb-5" data-i18n="m.sub"></div>
+            <div class="mani-progress mb-2"><i></i></div>
+            <div class="flex justify-between font-mono text-[10px] text-[var(--fg-dim)] mb-6">
+              <span data-i18n="m.verif"></span><span style="color:var(--accent)">64%</span>
+            </div>
+            <div id="maniDocs"></div>
+            <div class="flex items-center justify-between pt-4 font-mono text-[10px] uppercase tracking-widest">
+              <span class="text-[var(--fg-dim)]" data-i18n="m.status"></span>
+              <span style="color:var(--accent)"><i class="fas fa-check mr-1"></i><span data-i18n="m.ontime"></span> · 24 d</span>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 text-[11px] font-mono text-[var(--fg-mute)]" data-i18n="m.note"></p>
+      </div>
+
+      <article class="article-body max-w-2xl" id="procArticle"></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · QUOTE FORM ============ -->
+<section id="cotizar" class="light-sec px-6 py-24 md:py-32 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-40 pointer-events-none">
+    <div class="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] rounded-full blur-3xl" style="background:radial-gradient(circle,rgba(232,93,4,.25),transparent 70%)"></div>
+    <div class="absolute -bottom-1/3 -left-1/4 w-[600px] h-[600px] rounded-full blur-3xl" style="background:radial-gradient(circle,rgba(56,189,248,.1),transparent 70%)"></div>
+  </div>
+
+  <div class="max-w-5xl mx-auto relative z-10">
+    <div class="text-center mb-12">
+      <div class="section-label mb-6 justify-center" style="display:inline-flex;font-weight:700" data-i18n="q.label"></div>
+      <h2 class="font-display text-5xl md:text-6xl lg:text-8xl mb-6 text-black" style="text-wrap:balance"><span data-i18n="q.h2a"></span> <span style="color:var(--accent)" data-i18n="q.h2b"></span></h2>
+      <p class="text-black text-base md:text-lg max-w-2xl mx-auto" data-i18n="q.sub"></p>
+    </div>
+
+    <form class="border border-[var(--border)] bg-white p-6 md:p-10" id="quoteForm" novalidate>
+      <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
+        <div><label class="bx-lab block mb-1" for="f_name" data-i18n="f.name"></label><input class="nl-input" id="f_name" autocomplete="name"></div>
+        <div><label class="bx-lab block mb-1" for="f_company" data-i18n="f.company"></label><input class="nl-input" id="f_company" autocomplete="organization"></div>
+        <div><label class="bx-lab block mb-1" for="f_email" data-i18n="f.email"></label><input class="nl-input" id="f_email" type="email" autocomplete="email"></div>
+        <div><label class="bx-lab block mb-1" for="f_dest" data-i18n="f.dest"></label><input class="nl-input" id="f_dest" list="destList" autocomplete="off" data-i18n-ph="f.destPh"><datalist id="destList"></datalist></div>
+        <div class="md:col-span-2"><label class="bx-lab block mb-1" for="f_orig" data-i18n="f.orig"></label><select class="nl-input" id="f_orig"></select></div>
+        <div class="md:col-span-2">
+          <label class="bx-lab block mb-2" for="f_detail" data-i18n="f.detail"></label>
+          <textarea class="nl-input" id="f_detail" rows="4" data-i18n-ph="f.detailPh"></textarea>
+          <div class="flex flex-wrap items-center gap-3 mt-3">
+            <label class="attach-btn"><i class="fas fa-paperclip text-[10px]"></i><span data-i18n="f.attach"></span>
+              <input type="file" id="f_file" class="sr-only" accept=".xls,.xlsx,.csv,.pdf,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            </label>
+            <span class="text-xs text-[var(--fg-dim)]" id="fileNote" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="md:col-span-2">
+          <label class="flex items-start gap-3 text-sm cursor-pointer" id="consentWrap">
+            <input type="checkbox" id="f_consent" class="mt-1 w-4 h-4 flex-none" style="accent-color:var(--accent)">
+            <span data-i18n="f.consent"></span>
+          </label>
+        </div>
+        <div class="sr-only" aria-hidden="true"><label>Website <input id="f_web" tabindex="-1" autocomplete="off"></label></div>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-center gap-5 mt-8 pt-6 border-t border-[var(--border)]">
+        <button type="submit" id="f_submit" class="btn-primary whitespace-nowrap disabled:opacity-60 disabled:cursor-wait"><i class="fas fa-paper-plane text-[10px]"></i><span data-i18n="f.submit"></span></button>
+        <div class="text-xs text-[var(--fg-dim)] flex items-center gap-3">
+          <i class="fas fa-envelope" style="color:var(--accent)"></i>
+          <span><span data-i18n="f.alt"></span> <a href="mailto:hola@aicertix.com" class="text-black font-semibold underline decoration-[var(--accent)]">hola@aicertix.com</a></span>
+        </div>
+      </div>
+      <div id="formStatus" class="font-mono text-xs mt-4" style="color:var(--accent);min-height:1.2em" role="status" aria-live="polite"></div>
+    </form>
+
+    <div class="mt-14 grid grid-cols-3 gap-6 max-w-2xl mx-auto">
+      <div><div class="font-display text-4xl md:text-5xl" style="color:var(--accent)">24 h</div><div class="bx-lab mt-2" data-i18n="q.st1"></div></div>
+      <div><div class="font-display text-4xl md:text-5xl">0</div><div class="bx-lab mt-2" data-i18n="q.st2"></div></div>
+      <div><div class="font-display text-4xl md:text-5xl">99.4%</div><div class="bx-lab mt-2" data-i18n="q.st3"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-[var(--border)] bg-black">
+  <div class="max-w-[1600px] mx-auto px-6 py-16">
+    <div class="grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-5">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 flex items-center justify-center font-display text-xl" style="background:var(--accent);color:#fff">A</div>
+          <div class="flex flex-col leading-none">
+            <span class="font-display text-xl tracking-tight text-white">AiCertix</span>
+            <span class="text-[9px] font-mono tracking-[0.32em] mt-1" style="color:var(--accent)">IA AGENTES DE EXPORTACIONES</span>
+            <span class="text-[8px] font-mono tracking-widest text-white mt-0.5">Nuevo Sistema · Exportación Automatizada</span>
+          </div>
+        </div>
+        <p class="text-sm text-[var(--fg-dim)] max-w-sm mb-6" data-i18n="ft.tag"></p>
+        <div class="bx-lab mb-3" data-i18n="ft.social"></div>
+        <div class="flex gap-2.5">
+          <a href="https://www.linkedin.com/company/aicertix" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-linkedin-in text-sm"></i></a>
+          <a href="https://x.com/aicertix" target="_blank" rel="noopener" aria-label="X" class="w-10 h-10 border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-x-twitter text-sm"></i></a>
+          <a href="https://www.instagram.com/aicertix" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-instagram text-sm"></i></a>
+          <a href="https://www.youtube.com/@aicertix" target="_blank" rel="noopener" aria-label="YouTube" class="w-10 h-10 border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-youtube text-sm"></i></a>
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <div class="bx-lab mb-4" style="color:var(--accent)" data-i18n="ft.nav"></div>
+        <a href="#operacion" class="block py-1.5 text-sm text-[var(--fg-dim)] hover:text-white transition" data-i18n="nav.op"></a>
+        <a href="#corredores" class="block py-1.5 text-sm text-[var(--fg-dim)] hover:text-white transition" data-i18n="nav.corr"></a>
+        <a href="#proceso" class="block py-1.5 text-sm text-[var(--fg-dim)] hover:text-white transition" data-i18n="nav.proc"></a>
+        <a href="#cotizar" class="block py-1.5 text-sm text-[var(--fg-dim)] hover:text-white transition" data-i18n="nav.quote"></a>
+      </div>
+      <div class="md:col-span-2">
+        <div class="bx-lab mb-4" style="color:var(--accent)" data-i18n="ft.legal"></div>
+        <button onclick="openModal('privacy')" class="block py-1.5 text-sm text-[var(--fg-dim)] hover:text-white transition" data-i18n="m.privacy"></button>
+        <button onclick="openModal('terms')" class="block py-1.5 text-sm text-[var(--fg-dim)] hover:text-white transition" data-i18n="m.terms"></button>
+        <button onclick="openModal('cookies')" class="block py-1.5 text-sm text-[var(--fg-dim)] hover:text-white transition" data-i18n="m.cookies"></button>
+      </div>
+      <div class="md:col-span-3">
+        <div class="bx-lab mb-4" style="color:var(--accent)" data-i18n="ft.contact"></div>
+        <a href="mailto:hola@aicertix.com" class="block py-1.5 text-sm text-[var(--fg-dim)] hover:text-white transition">hola@aicertix.com</a>
+        <a href="https://aicertix.com" target="_blank" rel="noopener" class="block py-1.5 text-sm text-[var(--fg-dim)] hover:text-white transition">aicertix.com <i class="fas fa-arrow-up-right-from-square text-[9px]"></i></a>
+        <p class="py-1.5 text-sm text-[var(--fg-dim)]">Terminales Portuarios · Perú</p>
+      </div>
+    </div>
+    <div class="mt-12 pt-6 border-t border-[var(--border)] flex flex-wrap justify-between gap-4 font-mono text-[10.5px] text-[var(--fg-mute)]">
+      <span data-i18n="ft.addr"></span>
+      <span data-i18n="ft.rights"></span>
+      <span data-i18n="ft.made"></span>
+    </div>
+  </div>
 </footer>
 
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="m-back" onclick="closeModal()"></div>
+  <div class="m-panel">
+    <div class="m-head">
+      <div><h3 class="font-display text-2xl text-white" id="mTitle"></h3><div class="bx-lab mt-1" data-i18n="m.updated"></div></div>
+      <button class="m-x" onclick="closeModal()" aria-label="Close"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="m-body" id="mBody"></div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div class="chat-attn" id="chatAttn">
+  <span data-i18n="ch.attn"></span>
+  <button onclick="hideAttn()" aria-label="Close"><i class="fas fa-xmark text-xs"></i></button>
+</div>
+<div class="chat" id="chatPanel">
+  <div class="c-head">
+    <div class="c-av">A</div>
+    <div><div class="c-name" data-i18n="ch.name"></div><div class="c-role" data-i18n="ch.role"></div></div>
+    <span class="flex-1"></span>
+    <select id="voiceSel" class="c-voice" aria-label="Voz de Certix"></select>
+    <button class="w-8 h-8 flex items-center justify-center text-white hover:text-[var(--accent)] transition" id="voiceBtn" aria-label="Voice"><i class="fas fa-volume-xmark text-xs" id="volIcon"></i></button>
+    <button class="w-8 h-8 flex items-center justify-center text-white hover:text-[var(--accent)] transition" onclick="closeChat()" aria-label="Close chat"><i class="fas fa-xmark text-xs"></i></button>
+  </div>
+  <div class="c-log" id="chatLog"></div>
+  <div class="c-chips" id="chatChips"></div>
+  <div class="c-in">
+    <button class="c-mic" id="micBtn" aria-label="Hablar con Certix"><i class="fas fa-microphone text-xs" id="micIcon"></i></button>
+    <input id="chatInput" type="text" autocomplete="off">
+    <button class="c-send" id="chatSend" aria-label="Send"><i class="fas fa-paper-plane text-xs"></i></button>
+  </div>
+</div>
+<button class="chat-fab" id="fab" aria-label="Chat"><i class="fas fa-comments text-lg i-chatc"></i><i class="fas fa-xmark text-lg i-xc"></i><span class="badge-dot"></span></button>
+
+<script>
+/* ================= HELPERS ================= */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let LANG='es'; try{LANG=localStorage.getItem('aix-lang')||'es'}catch(e){}
+const T=()=>I18N[LANG];
+const nf=()=>new Intl.NumberFormat(LANG==='es'?'es-PE':'en-US');
+
+/* ================= DATA ================= */
+const DESTS=[
+ {code:'CNSHA',city:{es:'Shanghái',en:'Shanghai'},country:{es:'China',en:'China'},days:24,freq:4,region:'asia'},
+ {code:'KRPUS',city:{es:'Busan',en:'Busan'},country:{es:'Corea del Sur',en:'South Korea'},days:33,freq:3,region:'asia'},
+ {code:'JPTYO',city:{es:'Tokio',en:'Tokyo'},country:{es:'Japón',en:'Japan'},days:35,freq:3,region:'asia'},
+ {code:'SGSIN',city:{es:'Singapur',en:'Singapore'},country:{es:'Singapur',en:'Singapore'},days:32,freq:3,region:'asia'},
+ {code:'USLAX',city:{es:'Los Ángeles',en:'Los Angeles'},country:{es:'EE. UU.',en:'USA'},days:12,freq:5,region:'na'},
+ {code:'USNYC',city:{es:'Nueva York',en:'New York'},country:{es:'EE. UU.',en:'USA'},days:19,freq:4,region:'na'},
+ {code:'NLRTM',city:{es:'Róterdam',en:'Rotterdam'},country:{es:'Países Bajos',en:'Netherlands'},days:26,freq:4,region:'eu'},
+ {code:'DEHAM',city:{es:'Hamburgo',en:'Hamburg'},country:{es:'Alemania',en:'Germany'},days:27,freq:3,region:'eu'},
+];
+/* Principal international ports on Peru's Pacific coast, north to south (UN/LOCODE) */
+const PORTS=[
+ {code:'PEPAI',name:'Paita',region:'Piura'},
+ {code:'PESVY',name:'Salaverry',region:'La Libertad'},
+ {code:'PECHM',name:'Chimbote',region:'Áncash'},
+ {code:'PECHY',name:'Chancay',region:'Lima'},
+ {code:'PECLL',name:'Callao',region:'Callao'},
+ {code:'PEPIO',name:'General San Martín (Pisco)',region:'Ica'},
+ {code:'PEMRI',name:'Matarani',region:'Arequipa'},
+ {code:'PEILQ',name:'Ilo',region:'Moquegua'},
+];
+let ORIGIN='PECLL';
+try{const o=localStorage.getItem('aix-origin'); if(PORTS.some(p=>p.code===o)) ORIGIN=o;}catch(e){}
+const CARGOS=['agro','general','textil','chem','ecom'];
+
+/* ================= I18N ================= */
+const I18N={
+es:{
+'doc.title':'AiCertix — IA Agentes de Exportación Automatizada desde el Perú','hero.alt':'Buque portacontenedores zarpando de un puerto peruano al atardecer','ship.alt':'Buque portacontenedores visto desde arriba, navegando en mar abierto','ship.kicker':'En tránsito · Océano Pacífico','ship.h':'Cada contenedor, verificado antes de zarpar.','ship.t1a':'CARGA ESTIBADA · CONTENEDORES IDENTIFICADOS','ship.t1b':'VERIFICADO POR IA ✓','ship.t2a':'EXPEDIENTE DIGITAL · 6/6 DOCUMENTOS','ship.t2b':'LISTO PARA DESTINO',
+'nav.op':'Operación','nav.corr':'Corredores','nav.proc':'Proceso','nav.quote':'Cotizar','nav.cta':'Cotizar envío',
+'hero.live':'EN VIVO · TERMINAL — PERÚ','hero.ocean':'OCÉANO · PACÍFICO','hero.ports':'PUERTOS PERUANOS','hero.today':'8 DESTINOS · 3 REGIONES',
+'hero.kicker':'Exportación automatizada · Perú',
+'hero.h1':'Del Perú al mundo, sin tanto papeleo.',
+'hero.sub':'AiCertix automatiza todo el proceso de exportación de cualquier producto —café, espárragos, arándanos, cobre, textiles— desde el Perú hacia China, EE. UU., la Unión Europea, Asia y el mundo.',
+'hero.b1':'Cotizar mi envío','hero.b2':'Ver corredores','hero.hint':'Escaneo IA activo 24/7',
+'f.badge1':'CARGA EN PUERTO','f.dep':'ZARPE',
+'tag1a':'GRÚA 07 · CARGA 18/40 TEU','tag1b':'PESO 26.8 T · REEFER 2–8 °C',
+'tag2a':'HLCU 482913-7 · HS 0709.20 · ESPÁRRAGOS → CNSHA','tag2b':'VERIFICADO POR IA ✓',
+'tag3a':'B/L + CERT. DE ORIGEN · EMITIDOS EN 0.4 s','tag3b':'SUNAT · CANAL VERDE',
+'tag4a':'ETA SHANGHÁI · 24 DÍAS','tag4b':'RUTA PACÍFICO · A TIEMPO',
+'s1l':'tiempo de gestión documental','s2l':'precisión en clasificación HS','s3l':'del documento al zarpe','s4l':'monitoreo de carga activo','s.note':'Cifras objetivo del servicio.',
+'op.label':'/ 01 — La Operación','op.h2a':'Toda la operación,','op.h2b':'en un vistazo.',
+'op.sub':'Cajas de texto y datos en armonía: lo esencial de una exportación que antes tomaba semanas, hoy corre en piloto automático.',
+'b.a.h':'Desde cualquier muelle del Perú al puerto de destino, sin fricción.',
+'b.a.p':'Conectamos tu inventario, clasificamos la carga con IA, generamos cada documento y gestionamos la aduana de origen y de destino. Tú apruebas; nosotros ejecutamos.',
+'b.a.li1':'Clasificación HS con IA — 99.4% de precisión','b.a.li2':'Documentación digital firmada en minutos','b.a.li3':'Aduana del Perú y del puerto de destino, gestionadas',
+'b.a.cta':'Ver el proceso',
+'b.b.l':'puertos peruanos de origen','b.c.l':'del documento al zarpe',
+'b.d.t':'DOCUMENTOS · GENERADOS POR IA','b.e.t':'CADENA DE FRÍO','b.e.p':'Punta a punta para perecederos: arándanos, espárragos, paltas y pesca. Temperatura registrada en tiempo real.',
+'b.f.t':'CUMPLIMIENTO','b.f.p':'Filtrado de contrapartes contra listas OFAC, UE y ONU antes de cada reserva. Código de conducta firmado por todo el equipo.',
+'b.g.t':'MONITOREO 24/7 · PUERTA A PUERTA','b.g.p':'Posición, temperatura y estado documental en tiempo real, con alertas proactivas si algo se desvía del plan.',
+'b.h.l':'papel — todo el proceso es 100% digital','b.h.p':'De la factura al B/L, cada documento nace, se valida y se firma en la plataforma. Cero impresiones, cero carpetas.',
+'corr.label':'/ 02 — Corredores','corr.h2a':'Desde el Perú a','corr.h2b':'cualquier puerto del mundo.','corr.sub':'Elige tu puerto peruano de origen y haz clic en un destino: ambos quedan precargados en el formulario de solicitud.','corr.orig':'ORIGEN ·','corr.origT':'PUERTO DE ORIGEN · COSTA DEL PACÍFICO PERUANO','corr.destT':'PUERTO DE DESTINO',
+'corr.hint':'Tránsitos referenciales de puerto a puerto; varían según el puerto de origen y la línea naviera.',
+'corr.f.all':'Todos','corr.f.asia':'Asia','corr.f.na':'Norteamérica','corr.f.eu':'Europa',
+'corr.days':'DÍAS','corr.freq':'salidas/sem','corr.docs':'docs','corr.cta':'Cotizar',
+'proc.label':'/ 03 — El Proceso','proc.h2a':'Tu carga,','proc.h2b':'en piloto automático.','proc.sub':'El expediente queda fijo a la izquierda; el proceso, explicado a la derecha. Sin humo: así funciona cada zarpe.',
+'m.title':'EXPEDIENTE EN VIVO','m.id':'MFT-247','m.sub':'MSC ARÁNDANOS · REEFER 2–8 °C · 18/40 TEU','m.verif':'VERIFICACIÓN DE CARGA','m.status':'EN TRÁNSITO · PACÍFICO','m.ontime':'A TIEMPO','m.note':'Panel de demostración: así se ve un expediente real dentro de la plataforma AiCertix.',
+'q.label':'/ 04 — Cotiza','q.h2a':'Tu próxima carga','q.h2b':'puede zarpar esta semana.',
+'q.sub':'Cuéntenos qué exporta y cuál es su destino. Envíenos su solicitud, el detalle de los productos que desea exportar y su correo electrónico. Recibirá una respuesta de nuestro equipo en menos de 24 horas.',
+'f.name':'Nombre','f.company':'Empresa','f.email':'Correo electrónico corporativo','f.orig':'Puerto de origen en Perú','f.dest':'País de destino','f.destPh':'Elija o escriba un país','f.detail':'Lista de productos / Detalle de la solicitud','f.detailPh':'Productos, cantidades, fechas…','f.attach':'Adjuntar Excel o PDF','f.attached':(n,kb)=>`${n} · ${kb} KB`,'f.tooBig':'El archivo supera los 3 MB. Elija uno más liviano.','f.badType':'Solo se aceptan archivos Excel (.xls, .xlsx, .csv) o PDF.','f.consent':`Acepto que AiCertix EIRL use estos datos para responder a mi solicitud, según su <button type="button" class="underline font-semibold" onclick="openModal('privacy')">Política de Privacidad</button>.`,'f.needConsent':'Marque la casilla de consentimiento para enviar.','f.sending':'Enviando su solicitud…','f.done':'Solicitud recibida. Nuestro equipo le responderá en menos de 24 horas.','f.fail':'No se pudo enviar la solicitud. Inténtelo de nuevo o escríbanos a hola@aicertix.com.','f.product':'Producto a exportar','f.vol':'Volumen estimado','f.msg':'Cuéntanos de tu carga (opcional)',
+'f.submit':'Enviar solicitud','f.alt':'O escríbanos directamente:','f.ok':'Abriendo su programa de correo con la solicitud lista para hola@aicertix.com…','f.err':'Complete los campos marcados en rojo.','f.nodest':'Aún no lo defino',
+'q.st1':'respuesta garantizada','q.st2':'papel en el proceso','q.st3':'precisión HS con IA',
+'ft.tag':'Exportación inteligente desde el Perú hacia China, EE. UU., la UE, Asia y el mundo.','ft.social':'SÍGUENOS','ft.nav':'Mapa','ft.legal':'Legal','ft.contact':'Contacto',
+'ft.addr':'AiCertix EIRL · RUC 20614997762 · Terminales Portuarios, Perú · hola@aicertix.com',
+'ft.rights':'© 2026 AiCertix EIRL. Todos los derechos reservados.','ft.made':'AiCertix · aicertix.com',
+'m.privacy':'Política de Privacidad','m.terms':'Términos y Condiciones','m.cookies':'Política de Cookies','m.updated':'Última actualización: noviembre 2026',
+'legal.privacy':`<h4>1. Responsable</h4><p>AiCertix EIRL (RUC 20614997762), Terminales Portuarios, Perú. Contacto de datos personales: <b>hola@aicertix.com</b>.</p><h4>2. Datos que tratamos</h4><p>Datos de identificación y contacto; información comercial y de carga (descripciones, códigos HS, documentos de embarque); datos de uso de la plataforma; y conversaciones con nuestro asistente virtual.</p><h4>3. Finalidades</h4><p>Prestar el servicio de automatización de exportación; cumplir obligaciones aduaneras y tributarias ante SUNAT; facturar; mejorar la plataforma; y enviar novedades solo con tu consentimiento.</p><h4>4. Base jurídica</h4><p>Ejecución de contrato, cumplimiento de obligaciones legales, interés legítimo y consentimiento. Aplicamos la Ley N° 29733 de Protección de Datos Personales del Perú y, para usuarios de la UE, el RGPD.</p><h4>5. Conservación</h4><p>Conservamos tus datos durante la relación comercial y, después, los plazos exigidos por la normativa aduanera y tributaria (generalmente 5 años).</p><h4>6. Destinatarios y transferencias</h4><p>Líneas navieras y agentes de carga, autoridades aduaneras y de control, y proveedores tecnológicos bajo contratos de encargo. Las transferencias internacionales usan garantías adecuadas.</p><h4>7. Tus derechos</h4><p>Acceso, actualización, rectificación, cancelación y oposición (ARCO). Escribe a <b>hola@aicertix.com</b> y responderemos en máximo 15 días hábiles.</p><h4>8. Autoridad de control</h4><p>Puedes acudir a la Autoridad Nacional de Protección de Datos Personales (Perú), a Indecopi o a la autoridad de tu país.</p>`,
+'legal.terms':`<h4>1. Objeto</h4><p>Estas condiciones regulan el uso de aicertix.com y de los servicios de automatización y agenciamiento de exportación de AiCertix EIRL</p><h4>2. Naturaleza del servicio</h4><p>AiCertix actúa como agente logístico y facilitador de comercio exterior. No es transportador ni aseguradora; los embarques se rigen por los contratos de las líneas navieras y por los Incoterms® 2020 acordados por las partes.</p><h4>3. Uso de la plataforma</h4><p>Debes suministrar información veraz, contar con tus licencias de exportador ante SUNAT y no transportar mercancías prohibidas, ilícitas o sancionadas.</p><h4>4. Precios y pagos</h4><p>Las cotizaciones son orientativas hasta la confirmación de la reserva. Los precios no incluyen impuestos locales salvo indicación expresa.</p><h4>5. Responsabilidad</h4><p>Respondemos por la diligencia debida en la gestión documental y de despacho. La responsabilidad sobre la mercancía corresponde al transportador conforme a los convenios aplicables. No respondemos por fuerza mayor, huelgas, clima o decisiones aduaneras.</p><h4>6. Ley y jurisdicción</h4><p>Estas condiciones se rigen por las leyes del Perú; toda controversia se someterá a los tribunales del Perú, salvo normas imperativas de consumo de tu país.</p><h4>7. Modificaciones</h4><p>Publicaremos cualquier cambio en esta página con 15 días de antelación.</p>`,
+'legal.cookies':`<h4>Qué cookies usamos</h4><p><b>Esenciales:</b> sesión, seguridad e idioma de preferencia. Sin ellas la plataforma no funciona.</p><h4>Analíticas</h4><p>Métricas agregadas de uso para mejorar el servicio. Las direcciones IP se anonimizan.</p><h4>Cómo gestionarlas</h4><p>Puedes borrar o bloquear cookies desde tu navegador. Desactivar las esenciales puede impedir el inicio de sesión.</p><h4>Contacto</h4><p>Dudas sobre cookies: <b>hola@aicertix.com</b>.</p>`,
+'MQ':['PERÚ AL MUNDO','CAFÉ','ESPÁRRAGOS','ARÁNDANOS','QUINUA','PALTAS','CACAO','COBRE','TEXTILES','HARINA DE PESCADO'],
+'MDOCS':[['Conocimiento de embarque (B/L)','0.4 s'],['Factura comercial','0.9 s'],['Packing list','1.2 s'],['Certificado de origen','0.4 s'],['Certificado sanitario','2.1 s'],['Seguro de carga','0.3 s']],
+'FIL':[['all','Todos'],['asia','Asia'],['na','Norteamérica'],['eu','Europa']],
+'VOL':['1–5 toneladas (LCL)','6–20 toneladas (LCL)','21–100 toneladas','Contenedor completo (FCL)','Más de 1 contenedor'],
+'ARTICLE':`<div class="text-[10px] font-mono uppercase tracking-widest mb-4" style="color:var(--accent)">Acompañante de ruta · 5 pasos · lectura 3 min</div>
+<h2 class="font-display text-3xl md:text-5xl mb-7 leading-[1.02]">Un contenedor de arándanos que se despacha solo.</h2>
+<p class="drop-cap">Hay un momento, cerca de la medianoche, en que la terminal de un puerto peruano se vuelve un tablero de luces. Un contenedor con arándanos de Ica espera el zarpe; dentro, la cadena de frío marca 2,4 °C. Hace tres años, ese instante significaba carpetas, sellos y llamadas. Hoy significa una notificación: <em>documentos verificados, embarque autorizado</em>.</p>
+<p>AiCertix no reemplaza al exportador: le quita encima el papeleo. La plataforma conecta tu inventario, clasifica la carga con IA y genera cada documento que exigen la SUNAT, la línea naviera y la aduana de destino.</p>
+<div class="pull-quote">"Lo que antes tomaba tres semanas de trámites, hoy zarpa en 48 horas."</div>
+<h3>Conecta tu inventario</h3><p>Sincroniza tu ERP, tu hoja de cálculo o tu tienda online. AiCertix detecta lotes, pesos y volúmenes, y propone el equipo óptimo: contenedor seco, reefer o consolidado LCL.</p>
+<h3>Clasificación HS con IA</h3><p>El motor asigna códigos HS con <strong>99.4% de precisión</strong>, valida restricciones por país y calcula aranceles antes de que reserves el flete. Sin sorpresas en destino.</p>
+<h3>Documentación en minutos</h3><p>Factura comercial, packing list, B/L, certificado de origen y sanitario: generados, validados y firmados digitalmente, con trazabilidad completa de cada versión.</p>
+<h3>Aduana y embarque</h3><p>Reservamos el espacio, coordinamos la inspección en origen y gestionamos desde cualquier aduana del Perú y del puerto de destino. Tú apruebas; nosotros ejecutamos.</p>
+<h3>Rastreo puerta a puerta</h3><p>Desde el zarpe hasta la última milla: posición, temperatura y estado documental en tiempo real, con alertas proactivas si algo se desvía del plan.</p>
+<p class="text-[var(--fg-dim)] text-sm italic mt-12 pt-6 border-t border-[var(--border)]">Filtrado automático de contrapartes contra listas OFAC, UE y ONU antes de cada reserva. Incoterms® 2020. AiCertix opera como agente logístico; no es transportador.</p>`,
+'ch.name':'Certix','ch.role':'Asistente IA de exportación · AiCertix','ch.ph':'Escribe o pulsa el micrófono…','ch.attn':'¿Primera vez exportando desde el Perú? Te guiamos paso a paso.',
+'b.greet':'¡Hola! Soy <b>Certix</b>, el asistente de exportación de AiCertix. Zarpamos desde los principales puertos del <b>Perú</b>. Puedo cotizar tu ruta, explicar la documentación o rastrear tu contenedor. ¿Por dónde empezamos?',
+'b.cQuote':'Cotizar un envío','b.cDocs':'Ver documentación','b.cTrack':'Rastrear contenedor','b.cHuman':'Hablar con un humano','b.cMenu':'Menú','b.cForm':'Ir al formulario',
+'b.askDest':'¡Perfecto! Tu carga zarpa desde el <b>Perú</b>. ¿Cuál es el puerto de destino?',
+'b.pickDest':'Trabajamos estos corredores. ¿Cuál es el tuyo?',
+'b.askCargo':'¿Qué tipo de carga llevas?',
+'b.pickCargo':'Elige la categoría que mejor describa tu producto.',
+'b.qResult':(d,nd)=>`Ruta <b>${ORIGIN} → ${d.code}</b>: ${d.days} días de tránsito, ${d.freq} salidas por semana y ${nd} documentos, que generamos automáticamente. ¿Te llevo al formulario para dejar tu solicitud formal?`,
+'b.askCode':'Claro. Pásame el número de contenedor (formato ISO: 4 letras + 7 números) y te digo dónde está.',
+'b.codeBad':'Ese código no coincide con el formato ISO 6346 (ejemplo: <b>CMAU 123456 7</b>). ¿Lo intentamos de nuevo?',
+'b.trackOk':(code,st)=>`Demostración: <b>${code}</b> — ${st}. Te llegará una alerta proactiva si algo cambia.`,
+'b.askEmail':'Con gusto. Déjame tu correo y un especialista te escribe en menos de 2 horas hábiles.',
+'b.emailBad':'Hmm, ese correo no parece válido. Escríbelo así: nombre@empresa.com',
+'b.humanDone':e=>`Listo. Un especialista te contactará a <b>${e}</b> en menos de 2 horas hábiles. ¿Algo más en lo que te ayude?`,
+'b.docsIntro':'¿Qué categoría describe mejor tu producto?',
+'b.docsList':(name,docs)=>`Para <b>${name}</b> necesitas: ${docs.join(', ')}. Nosotros los generamos y validamos con IA en minutos.`,
+'b.thanks':'¡Con gusto! Ese es nuestro trabajo. ¿Algo más en lo que te ayude?',
+'b.fallback':'No estoy seguro de haber entendido, pero puedo ayudarte con esto:',
+'b.statuses':['En aduana de origen — Perú, verificación IA aprobada','En tránsito — Océano Pacífico','En transbordo — terminal de conexión','En aduana de destino — canal verde','Última milla — entrega programada'],
+'cargo.agro':'Agro y perecederos','cargo.general':'Carga general','cargo.textil':'Textil y calzado','cargo.chem':'Química y minerales','cargo.ecom':'E-commerce',
+'docs.agro':['Factura comercial','Packing list','B/L','Certificado de origen','Certificado fitosanitario','Certificado de calidad'],
+'docs.general':['Factura comercial','Packing list','B/L','Certificado de origen'],
+'docs.textil':['Factura comercial','Packing list','B/L','Certificado de origen'],
+'docs.chem':['Factura comercial','Packing list','B/L','MSDS','Certificado de origen','Permiso especial'],
+'docs.ecom':['Factura proforma','Manifiesto de carga','Etiquetas HS por SKU','B/L consolidado']
+}, 
+en:{
+'doc.title':'AiCertix — AI Agents for Automated Exporting from Peru','hero.alt':'Container ship leaving a Peruvian port at sunset','ship.alt':'Container ship seen from above, sailing in open sea','ship.kicker':'In transit · Pacific Ocean','ship.h':'Every container, verified before it sails.','ship.t1a':'CARGO STOWED · CONTAINERS IDENTIFIED','ship.t1b':'AI VERIFIED ✓','ship.t2a':'DIGITAL FILE · 6/6 DOCUMENTS','ship.t2b':'READY FOR DESTINATION',
+'nav.op':'Operations','nav.corr':'Corridors','nav.proc':'Process','nav.quote':'Get a quote','nav.cta':'Get a quote',
+'hero.live':'LIVE · TERMINAL — PERU','hero.ocean':'OCEAN · PACIFIC','hero.ports':'PERUVIAN PORTS','hero.today':'8 DESTINATIONS · 3 REGIONS',
+'hero.kicker':'Automated exporting · Peru',
+'hero.h1':'From Peru to the world, zero paperwork.',
+'hero.sub':'AiCertix automates the entire export process for any kind of product —coffee, asparagus, blueberries, copper, textiles— from Peru to China, the USA, the European Union, Asia and everywhere else.',
+'hero.b1':'Get my quote','hero.b2':'View corridors','hero.hint':'AI scanning 24/7',
+'f.badge1':'CARGO AT GATE','f.dep':'DEPARTURE',
+'tag1a':'CRANE 07 · LOADING 18/40 TEU','tag1b':'WEIGHT 26.8 T · REEFER 2–8 °C',
+'tag2a':'HLCU 482913-7 · HS 0709.20 · ASPARAGUS → CNSHA','tag2b':'AI VERIFIED ✓',
+'tag3a':'B/L + CERT. OF ORIGIN · ISSUED IN 0.4 s','tag3b':'SUNAT · GREEN CHANNEL',
+'tag4a':'ETA SHANGHAI · 24 DAYS','tag4b':'PACIFIC ROUTE · ON SCHEDULE',
+'s1l':'document management time','s2l':'HS classification accuracy','s3l':'from paperwork to sailing','s4l':'active cargo monitoring','s.note':'Service target figures.',
+'op.label':'/ 01 — The Operation','op.h2a':'The whole operation,','op.h2b':'at one glance.',
+'op.sub':'Text and data boxes in harmony: what used to take weeks of exporting now runs on autopilot.',
+'b.a.h':'From the Peruvian docks to the destination port, zero friction.',
+'b.a.p':'We connect your inventory, classify cargo with AI, generate every document and manage outbound and destination customs. You approve; we execute.',
+'b.a.li1':'AI HS classification — 99.4% accuracy','b.a.li2':'Digital paperwork signed within minutes','b.a.li3':'Peru and destination customs, fully managed',
+'b.a.cta':'See the process',
+'b.b.l':'Peruvian ports of origin','b.c.l':'from document to sailing',
+'b.d.t':'DOCUMENTS · AI-GENERATED','b.e.t':'COLD CHAIN','b.e.p':'End to end for perishables: blueberries, asparagus, avocados and seafood. Temperature logged in real time.',
+'b.f.t':'COMPLIANCE','b.f.p':'Counterparties screened against OFAC, EU and UN lists before every booking. Code of conduct signed by the whole team.',
+'b.g.t':'24/7 MONITORING · DOOR TO DOOR','b.g.p':'Position, temperature and document status in real time, with proactive alerts if anything drifts from the plan.',
+'b.h.l':'paper — the whole process is 100% digital','b.h.p':'From invoice to B/L, every document is born, validated and signed inside the platform. Zero printing, zero binders.',
+'corr.label':'/ 02 — Corridors','corr.h2a':'From Peru to','corr.h2b':'any port.','corr.sub':'Choose your Peruvian port of origin and click a destination: both are preloaded into the quote form.','corr.orig':'ORIGIN ·','corr.origT':'PORT OF ORIGIN · PERUVIAN PACIFIC COAST','corr.destT':'DESTINATION PORT',
+'corr.hint':'Indicative port-to-port transits; they vary with the port of origin and the carrier.',
+'corr.f.all':'All','corr.f.asia':'Asia','corr.f.na':'North America','corr.f.eu':'Europe',
+'corr.days':'DAYS','corr.freq':'sailings/wk','corr.docs':'docs','corr.cta':'Quote',
+'proc.label':'/ 03 — The Process','proc.h2a':'Your cargo,','proc.h2b':'on autopilot.','proc.sub':'The file stays pinned on the left; the process is explained on the right. No smoke: this is how every sailing works.',
+'m.title':'LIVE FILE','m.id':'MFT-247','m.sub':'MSC BLUEBERRIES · REEFER 2–8 °C · 18/40 TEU','m.verif':'CARGO VERIFICATION','m.status':'IN TRANSIT · PACIFIC','m.ontime':'ON TIME','m.note':'Demo panel: this is what a real file looks like inside the AiCertix platform.',
+'q.label':'/ 04 — Get a quote','q.h2a':'Your next cargo','q.h2b':'could sail this week.',
+'q.sub':'Tell us what you export and where it is going. Send us your request, the details of the products you want to export and your email address. You will receive a reply from our team within 24 hours.',
+'f.name':'Name','f.company':'Company','f.email':'Corporate email','f.orig':'Port of origin in Peru','f.dest':'Destination country','f.destPh':'Choose or type a country','f.detail':'Product list / Request details','f.detailPh':'Products, quantities, dates…','f.attach':'Attach Excel or PDF','f.attached':(n,kb)=>`${n} · ${kb} KB`,'f.tooBig':'The file is over 3 MB. Please choose a smaller one.','f.badType':'Only Excel (.xls, .xlsx, .csv) or PDF files are accepted.','f.consent':`I agree that AiCertix EIRL may use this data to answer my request, under its <button type="button" class="underline font-semibold" onclick="openModal('privacy')">Privacy Policy</button>.`,'f.needConsent':'Tick the consent box to send.','f.sending':'Sending your request…','f.done':'Request received. Our team will reply within 24 hours.','f.fail':'The request could not be sent. Please try again or write to hola@aicertix.com.','f.product':'Product to export','f.vol':'Estimated volume','f.msg':'Tell us about your cargo (optional)',
+'f.submit':'Send request','f.alt':'Or write to us directly:','f.ok':'Opening your email client with the request ready for hola@aicertix.com…','f.err':'Please complete the fields marked in red.','f.nodest':'Not decided yet',
+'q.st1':'guaranteed response','q.st2':'paper in the process','q.st3':'HS accuracy with AI',
+'ft.tag':'Smart exporting from Peru to China, the USA, the EU, Asia and the world.','ft.social':'FOLLOW US','ft.nav':'Sitemap','ft.legal':'Legal','ft.contact':'Contact',
+'ft.addr':'AiCertix EIRL · Tax ID 20614997762 · Port Terminals, Peru · hola@aicertix.com',
+'ft.rights':'© 2026 AiCertix EIRL. All rights reserved.','ft.made':'AiCertix · aicertix.com',
+'m.privacy':'Privacy Policy','m.terms':'Terms & Conditions','m.cookies':'Cookie Policy','m.updated':'Last updated: November 2026',
+'legal.privacy':`<h4>1. Controller</h4><p>AiCertix EIRL (Tax ID 20614997762), Port Terminals, Peru. Data protection contact: <b>hola@aicertix.com</b>.</p><h4>2. Data we process</h4><p>Identification and contact data; commercial and cargo information (descriptions, HS codes, shipping documents); platform usage data; and conversations with our virtual assistant.</p><h4>3. Purposes</h4><p>Providing the export automation service; meeting customs and tax obligations before SUNAT; invoicing; improving the platform; and sending updates only with your consent.</p><h4>4. Legal basis</h4><p>Contract performance, legal obligations, legitimate interest and consent. We apply Peru's Law N° 29733 on Personal Data Protection and, for EU users, the GDPR.</p><h4>5. Retention</h4><p>We keep your data while the business relationship exists and afterwards for the periods required by customs and tax regulations (generally 5 years).</p><h4>6. Recipients and transfers</h4><p>Ocean carriers and freight agents, customs and control authorities, and technology vendors under processing agreements. International transfers use adequate safeguards.</p><h4>7. Your rights</h4><p>Access, updating, rectification, cancellation and opposition (ARCO). Write to <b>hola@aicertix.com</b> and we will reply within 15 business days.</p><h4>8. Supervisory authority</h4><p>You may contact the National Authority for Personal Data Protection (Peru), Indecopi, or your local authority.</p>`,
+'legal.terms':`<h4>1. Scope</h4><p>These terms govern the use of aicertix.com and of the export automation and brokerage services of AiCertix EIRL</p><h4>2. Nature of the service</h4><p>AiCertix does not act as a logistics agent; it is only a foreign-trade facilitator. It is not a carrier or insurer; shipments are governed by the carriers' contracts and by the Incoterms® 2020 agreed by the parties.</p><h4>3. Use of the platform</h4><p>You must provide truthful information, hold your exporter licenses before SUNAT, and must not ship prohibited, illicit or sanctioned goods.</p><h4>4. Pricing and payment</h4><p>Quotes are indicative until the booking is confirmed. Prices exclude local taxes unless expressly stated.</p><h4>5. Liability</h4><p>We are responsible for due diligence in documentation and clearance management. Liability for the goods lies with the carrier under the applicable conventions. We are not liable for force majeure, strikes, weather or customs decisions.</p><h4>6. Governing law</h4><p>These terms are governed by the laws of Peru; disputes fall under the courts of Peru, save mandatory consumer rules of your country.</p><h4>7. Changes</h4><p>Any changes will be published on this page 15 days in advance.</p>`,
+'legal.cookies':`<h4>Cookies we use</h4><p><b>Essential:</b> session, security and language preference. The platform cannot work without them.</p><h4>Analytics</h4><p>Aggregated usage metrics to improve the service. IP addresses are anonymized.</p><h4>Managing cookies</h4><p>You can delete or block cookies in your browser settings. Disabling essential cookies may prevent login.</p><h4>Contact</h4><p>Cookie questions: <b>hola@aicertix.com</b>.</p>`,
+'MQ':['PERU TO THE WORLD','COFFEE','ASPARAGUS','BLUEBERRIES','QUINOA','AVOCADOS','CACAO','COPPER','TEXTILES','FISHMEAL'],
+'MDOCS':[['Bill of lading (B/L)','0.4 s'],['Commercial invoice','0.9 s'],['Packing list','1.2 s'],['Certificate of origin','0.4 s'],['Sanitary certificate','2.1 s'],['Cargo insurance','0.3 s']],
+'FIL':[['all','All'],['asia','Asia'],['na','North America'],['eu','Europe']],
+'VOL':['1–5 tons (LCL)','6–20 tons (LCL)','21–100 tons','Full container (FCL)','More than 1 container'],
+'ARTICLE':`<div class="text-[10px] font-mono uppercase tracking-widest mb-4" style="color:var(--accent)">Route companion · 5 steps · 3 min read</div>
+<h2 class="font-display text-3xl md:text-5xl mb-7 leading-[1.02]">A container of blueberries that clears itself.</h2>
+<p class="drop-cap">There is a moment, near midnight, when a Peruvian port terminal turns into a board of lights. A container of blueberries from Ica waits to sail; inside, the cold chain reads 2.4 °C. Three years ago that instant meant binders, stamps and phone calls. Today it means one notification: <em>documents verified, sailing authorized</em>.</p>
+<p>AiCertix does not replace the exporter: it lifts the paperwork off their desk. The platform connects your inventory, classifies cargo with AI and generates every document required by SUNAT, the ocean carrier and the destination customs.</p>
+<div class="pull-quote">"What used to take three weeks of red tape now sails in 48 hours."</div>
+<h3>Connect your inventory</h3><p>Sync your ERP, spreadsheet or online store. AiCertix detects batches, weights and volumes, and proposes the right equipment: dry container, reefer or LCL consolidation.</p>
+<h3>AI HS classification</h3><p>The engine assigns HS codes with <strong>99.4% accuracy</strong>, checks country restrictions and computes duties before you book freight. No surprises at destination.</p>
+<h3>Paperwork within minutes</h3><p>Commercial invoice, packing list, B/L, certificate of origin and sanitary certificate: generated, validated and digitally signed, with full version traceability.</p>
+<h3>Customs and sailing</h3><p>We book the space, coordinate origin inspections and manage Peruvian customs plus the destination port's. You approve; we execute.</p>
+<h3>Door-to-door tracking</h3><p>From sailing to last mile: position, temperature and document status in real time, with proactive alerts if anything drifts from the plan.</p>
+<p class="text-[var(--fg-dim)] text-sm italic mt-12 pt-6 border-t border-[var(--border)]">Counterparties automatically screened against OFAC, EU and UN lists before every booking. Incoterms® 2020. AiCertix operates as a logistics agent; it is not a carrier.</p>`,
+'ch.name':'Certix','ch.role':'Export AI assistant · AiCertix','ch.ph':'Type or press the microphone…','ch.attn':"First time exporting from Peru? We'll walk you through it.",
+'b.greet':'Hi! I am <b>Certix</b>, the AiCertix export assistant. We sail from the main ports of <b>Peru</b>. I can quote your route, explain the paperwork or track your container. Where shall we start?',
+'b.cQuote':'Quote a shipment','b.cDocs':'See documentation','b.cTrack':'Track a container','b.cHuman':'Talk to a human','b.cMenu':'Menu','b.cForm':'Go to the form',
+'b.askDest':'Great! Your cargo sails from <b>Peru</b>. What is the destination port?',
+'b.pickDest':'We serve these corridors. Which one is yours?',
+'b.askCargo':'What kind of cargo are you shipping?',
+'b.pickCargo':'Pick the category that best describes your product.',
+'b.qResult':(d,nd)=>`Route <b>${ORIGIN} → ${d.code}</b>: ${d.days} days of transit, ${d.freq} sailings per week and ${nd} documents, which we generate automatically. Shall I take you to the form to leave your formal request?`,
+'b.askCode':'Sure. Send me the container number (ISO format: 4 letters + 7 digits) and I will tell you where it is.',
+'b.codeBad':"That code does not match ISO 6346 format (e.g. <b>CMAU 123456 7</b>). Shall we try again?",
+'b.trackOk':(code,st)=>`Demo: <b>${code}</b> — ${st}. You will get a proactive alert if anything changes.`,
+'b.askEmail':'Happy to help. Leave your email and a specialist will write to you within 2 business hours.',
+'b.emailBad':"Hmm, that email does not look valid. Write it like this: name@company.com",
+'b.humanDone':e=>`Done. A specialist will contact you at <b>${e}</b> within 2 business hours. Anything else I can help with?`,
+'b.docsIntro':'Which category best describes your product?',
+'b.docsList':(name,docs)=>`For <b>${name}</b> you need: ${docs.join(', ')}. We generate and validate them with AI in minutes.`,
+'b.thanks':'My pleasure! That is what we do. Anything else I can help with?',
+'b.fallback':"I'm not sure I got that, but here is what I can do for you:",
+'b.statuses':['Origin customs — Peru, AI verification approved','In transit — Pacific Ocean','Transshipping — hub terminal','Destination customs — green channel','Last mile — delivery scheduled'],
+'cargo.agro':'Agro & perishables','cargo.general':'General cargo','cargo.textil':'Textiles & footwear','cargo.chem':'Chemicals & minerals','cargo.ecom':'E-commerce',
+'docs.agro':['Commercial invoice','Packing list','B/L','Certificate of origin','Phytosanitary certificate','Quality certificate'],
+'docs.general':['Commercial invoice','Packing list','B/L','Certificate of origin'],
+'docs.textil':['Commercial invoice','Packing list','B/L','Certificate of origin'],
+'docs.chem':['Commercial invoice','Packing list','B/L','MSDS','Certificate of origin','Special permit'],
+'docs.ecom':['Proforma invoice','Cargo manifest','HS labels per SKU','Consolidated B/L']
+}
+};
+
+/* ================= LANGUAGE ================= */
+function applyLang(l){
+  LANG=l; try{localStorage.setItem('aix-lang',l)}catch(e){}
+  document.documentElement.lang=l;
+  $$('.lang-sw button').forEach(b=>{
+    const on=b.dataset.lang===l;
+    b.style.background=on?'var(--accent)':'transparent';
+    b.style.color=on?'#fff':'var(--fg-dim)';
+  });
+  $$('[data-i18n]').forEach(el=>{const v=T()[el.dataset.i18n]; if(typeof v==='string') el.innerHTML=v;});
+  $$('[data-i18n-ph]').forEach(el=>{const v=T()[el.dataset.i18nPh]; if(typeof v==='string') el.placeholder=v;});
+  $$('[data-i18n-alt]').forEach(el=>{const v=T()[el.dataset.i18nAlt]; if(typeof v==='string') el.alt=v;});
+  document.title=T()['doc.title'];
+  buildMarquee(); buildPorts(); buildFilters(); buildCorr(currentFilter); buildSelects(); buildMiniDocs(); buildManifest();
+  $('#procArticle').innerHTML=T().ARTICLE;
+  $('#chatInput').placeholder=T()['ch.ph'];
+  buildVoiceSel();
+}
+ $$('.lang-sw button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
+
+/* ================= MARQUEE ================= */
+function buildMarquee(){
+  const one=T().MQ.map(t=>`<span class="px-6">${t}</span><span class="px-3" style="color:var(--red)">●</span>`).join('');
+  $('#marquee').innerHTML=one+one;
+}
+
+/* ================= BENTO mini docs ================= */
+function buildMiniDocs(){
+  $('#bentoDocs').innerHTML=T().MDOCS.map(d=>`<div class="bx-check"><i class="fas fa-check text-[9px]" style="color:var(--accent)"></i><span class="text-[13px]">${d[0]}</span></div>`).join('');
+}
+
+/* ================= MANIFEST ================= */
+function buildManifest(){
+  $('#maniDocs').innerHTML=T().MDOCS.map((d,i)=>`<div class="mani-doc"><span><i class="fas fa-check mr-2" style="color:var(--accent)"></i>${d[0]}</span><span class="font-mono text-[10px]" style="color:var(--accent)">${d[1]}</span></div>`).join('');
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+    $$('#maniDocs .mani-doc').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),i*160));
+    io.disconnect();
+  }}),{threshold:.3});
+  io.observe($('#maniDocs'));
+}
+
+/* ================= PERUVIAN PORTS (origin) ================= */
+function setOrigin(code,fromForm){
+  ORIGIN=code; try{localStorage.setItem('aix-origin',code)}catch(e){}
+  const p=PORTS.find(x=>x.code===code);
+  $('#origLabel').textContent=p.code+' · '+p.name.toUpperCase();
+  $$('#portGrid .port-pick').forEach(b=>{const on=b.dataset.code===code;b.setAttribute('aria-pressed',on);b.classList.toggle('on',on);});
+  if(!fromForm&&$('#f_orig'))$('#f_orig').value=code;
+}
+function buildPorts(){
+  $('#portGrid').innerHTML=PORTS.map(p=>`<button type="button" class="port-pick" data-code="${p.code}" aria-pressed="false"><span class="font-mono text-[10px] tracking-widest">${p.code}</span><span class="font-display text-lg md:text-xl leading-tight">${p.name}</span><span class="font-mono text-[10px] uppercase tracking-widest text-[var(--fg-dim)]">${p.region}</span></button>`).join('');
+  $$('#portGrid .port-pick').forEach(b=>b.addEventListener('click',()=>setOrigin(b.dataset.code)));
+  setOrigin(ORIGIN);
+}
+
+/* ================= CORRIDORS ================= */
+let currentFilter='all';
+function buildFilters(){
+  $('#corrFilters').innerHTML=T().FIL.map(f=>`<button class="filter-chip ${f[0]===currentFilter?'active':''}" data-f="${f[0]}">${f[1]}</button>`).join('');
+  $$('#corrFilters .filter-chip').forEach(b=>b.addEventListener('click',()=>{
+    currentFilter=b.dataset.f;
+    $$('#corrFilters .filter-chip').forEach(x=>x.classList.toggle('active',x===b));
+    buildCorr(currentFilter);
+  }));
+}
+function buildCorr(filter){
+  const list=DESTS.filter(d=>filter==='all'||d.region===filter);
+  $('#corrGrid').innerHTML=list.map(d=>`
+    <article class="port-card" data-code="${d.code}">
+      <div class="flex items-center justify-between mb-3">
+        <span class="font-mono text-xs text-[var(--fg-dim)]">${d.code}</span>
+        <span class="font-mono text-xs font-bold" style="color:var(--accent)">${d.days} ${T()['corr.days']}</span>
+      </div>
+      <h3 class="font-display text-3xl mb-1">${d.city[LANG]}</h3>
+      <div class="font-mono text-[10px] uppercase tracking-widest text-[var(--fg-dim)] mb-4">${d.country[LANG]}</div>
+      <div class="flex items-center gap-3 font-mono text-[10px] text-[var(--fg-mute)]">
+        <span><i class="fas fa-ship mr-1" style="color:var(--accent)"></i>${d.freq} ${T()['corr.freq']}</span>
+        <span>·</span><span>4 ${T()['corr.docs']}</span>
+      </div>
+      <span class="go text-xs font-mono font-bold">${T()['corr.cta']} <i class="fas fa-arrow-right text-[9px]"></i></span>
+    </article>`).join('');
+  $$('#corrGrid .port-card').forEach(c=>c.addEventListener('click',()=>{
+    const d=DESTS.find(x=>x.code===c.dataset.code); $('#f_dest').value=`${d.country[LANG]} — ${d.city[LANG]} (${d.code})`;
+    const f=$('#quoteForm'); f.classList.remove('form-flash'); void f.offsetWidth; f.classList.add('form-flash');
+    $('#cotizar').scrollIntoView({behavior:reduce?'auto':'smooth'});
+  }));
+}
+
+/* ================= SELECTS ================= */
+function buildSelects(){
+  $('#destList').innerHTML=[...new Set(DESTS.map(d=>d.country[LANG]))].map(c=>`<option value="${c}"></option>`).join('');
+  $('#f_orig').innerHTML=PORTS.map(p=>`<option value="${p.code}">${p.name} (${p.code}) — ${p.region}</option>`).join('');
+  $('#f_orig').value=ORIGIN; $('#f_orig').onchange=e=>setOrigin(e.target.value,true);
+  showFile();
+}
+const MAX_FILE=3*1024*1024, FILE_OK=/\.(xlsx?|csv|pdf)$/i;
+function fileProblem(f){ return !f?null:!FILE_OK.test(f.name)?'f.badType':f.size>MAX_FILE?'f.tooBig':null; }
+function showFile(){
+  const f=$('#f_file').files[0], bad=fileProblem(f), note=$('#fileNote');
+  note.textContent=!f?'':bad?T()[bad]:T()['f.attached'](f.name,Math.max(1,Math.round(f.size/1024)));
+  note.style.color=bad?'var(--red)':'';
+}
+ $('#f_file').addEventListener('change',showFile);
+
+/* ================= RED SCAN controller (every [data-scan] frame) ================= */
+(function(){
+  const CYCLE=5200, t0=performance.now();
+  const frames=$$('[data-scan]').map(frame=>({frame,pct:frame.querySelector('.scan-pct'),obj:frame.querySelector('.scan-obj'),done:frame.querySelector('.scan-done'),tags:[...frame.querySelectorAll('.det-tag')]}));
+  if(reduce){frames.forEach(f=>{f.pct.textContent='100';f.obj.textContent=String(f.tags.length).padStart(2,'0');f.done.style.display='inline';f.tags.forEach(t=>t.classList.add('on'));});return;}
+  (function loop(now){
+    const p=((now-t0)%CYCLE)/CYCLE;
+    frames.forEach(f=>{
+      const fr=f.frame.getBoundingClientRect();
+      if(fr.bottom<0||fr.top>innerHeight)return;
+      f.pct.textContent=String(Math.round(p*100)).padStart(3,'0');
+      let n=0;
+      f.tags.forEach(t=>{
+        const r=t.getBoundingClientRect(); if(r.width===0)return;
+        const on=p>(r.top+r.height/2-fr.top)/fr.height; t.classList.toggle('on',on); if(on)n++;
+      });
+      f.obj.textContent=String(n).padStart(2,'0');
+      f.done.style.display=p>0.97?'inline':'none';
+    });
+    requestAnimationFrame(loop);
+  })(t0);
+})();
+
+/* ================= reveal + count-up + progress ================= */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
+ $$('.bx').forEach(el=>io.observe(el));
+function countUp(el){
+  const target=+el.dataset.count, suf=el.dataset.suffix||'', t0=performance.now(), dur=1400;
+  if(reduce||target===0){el.textContent=nf().format(target)+suf;return;}
+  (function f(now){const p=Math.min(1,(now-t0)/dur),e2=1-Math.pow(1-p,3);
+    el.textContent=nf().format(Math.round(target*e2))+suf;
+    if(p<1)requestAnimationFrame(f);})(t0);
+}
+new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(countUp);ob.disconnect();}}),{threshold:.4}).observe($('#operacion'));
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  $('#scrollProgress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  $('#backToTop').classList.toggle('visible',h.scrollTop>600);
+},{passive:true});
+ $('#backToTop').addEventListener('click',()=>scrollTo({top:0,behavior:reduce?'auto':'smooth'}));
+
+/* ================= MOBILE MENU ================= */
+ $('#burger').addEventListener('click',()=>{$('#mmenu').classList.toggle('hidden');$('#mmenu').classList.toggle('flex');});
+ $$('#mmenu a').forEach(a=>a.addEventListener('click',()=>{$('#mmenu').classList.add('hidden');$('#mmenu').classList.remove('flex');}));
+
+/* ================= REQUEST FORM → /api/solicitud (Supabase + email) ================= */
+const toBase64=file=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]||'');r.onerror=rej;r.readAsDataURL(file);});
+ $('#quoteForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const v=id=>$('#'+id).value.trim();
+  const name=v('f_name'),email=v('f_email'),detail=v('f_detail');
+  const st=$('#formStatus'), say=(key,err)=>{st.textContent=T()[key];st.style.color=err?'var(--red)':'var(--accent)';};
+  let ok=true;
+  [['f_name',name],['f_email',email],['f_detail',detail]].forEach(([id,val])=>{
+    const bad=!val||(id==='f_email'&&!/^[\w.+-]+@[\w-]+\.[\w.]{2,}$/.test(val));
+    $('#'+id).classList.toggle('invalid',bad); if(bad)ok=false;
+  });
+  if(!ok)return say('f.err',true);
+  const file=$('#f_file').files[0], bad=fileProblem(file);
+  if(bad)return say(bad,true);
+  if(!$('#f_consent').checked)return say('f.needConsent',true);
+
+  const orig=$('#f_orig'), btn=$('#f_submit');
+  btn.disabled=true; say('f.sending');
+  try{
+    const payload={
+      nombre:name, empresa:v('f_company'), correo:email, pais_destino:v('f_dest'),
+      puerto_origen:orig.options[orig.selectedIndex].text, detalle:detail,
+      idioma:LANG, consentimiento:true, website:$('#f_web').value
+    };
+    if(file)payload.archivo={nombre:file.name,base64:await toBase64(file)};
+    const r=await fetch('/api/solicitud',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||!j.ok)throw new Error(j.error||r.status);
+    say('f.done');
+    e.target.reset(); $('#f_orig').value=ORIGIN; showFile();
+  }catch(err){ say('f.fail',true); }
+  finally{ btn.disabled=false; }
+});
+
+/* ================= MODAL ================= */
+const MODAL_TITLES={privacy:'m.privacy',terms:'m.terms',cookies:'m.cookies'};
+function openModal(k){
+  $('#mTitle').textContent=T()[MODAL_TITLES[k]];
+  $('#mBody').innerHTML=T()['legal.'+k];
+  $('#modal').classList.add('open'); document.body.style.overflow='hidden';
+}
+function closeModal(){$('#modal').classList.remove('open');document.body.style.overflow='';}
+addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeChat();}});
+
+/* ================= CHAT BOT ================= */
+const chat={open:false,step:'idle',data:{},voice:false,greeted:false};
+const panel=$('#chatPanel'),log=$('#chatLog'),chipsRow=$('#chatChips'),cin=$('#chatInput');
+const AVATAR=`<div class="bavatar">A</div>`;
+const menuChips=()=>[{t:T()['b.cQuote'],a:'quote'},{t:T()['b.cDocs'],a:'docs'},{t:T()['b.cTrack'],a:'track'},{t:T()['b.cHuman'],a:'human'}];
+const destChips=()=>DESTS.map(d=>({t:`${d.city[LANG]} (${d.code})`,a:'dest:'+d.code}));
+const cargoChips=()=>CARGOS.map(c=>({t:T()['cargo.'+c],a:'cargo:'+c}));
+function scrollLog(){log.scrollTop=log.scrollHeight;}
+function addMsg(who,html){
+  const m=document.createElement('div');m.className='msg '+who;
+  m.innerHTML=(who==='bot'?AVATAR:'')+`<div class="bubble">${html}</div>`;
+  log.appendChild(m);scrollLog();return m;
+}
+function botSay(text,opts={}){
+  const t=addMsg('bot','<span class="typing"><span></span><span></span><span></span></span>');
+  setTimeout(()=>{t.remove();addMsg('bot',text);if(chat.voice)speak(text);
+    chipsRow.innerHTML='';
+    (opts.chips||[]).forEach(c=>{const b=document.createElement('button');b.className='c-chip';b.textContent=c.t;
+      b.onclick=()=>handleChip(c);chipsRow.appendChild(b);});
+  },Math.min(1500,550+text.length*5));
+}
+function userSend(text){addMsg('user',esc(text));chipsRow.innerHTML='';routeUser(text);}
+function handleChip(c){
+  const a=c.a;
+  if(a==='quote'){chat.step='q_dest';userSend(c.t);return botSay(T()['b.askDest'],{chips:destChips()});}
+  if(a==='docs'){chat.step='d_type';userSend(c.t);return botSay(T()['b.docsIntro'],{chips:cargoChips()});}
+  if(a==='track'){chat.step='t_code';userSend(c.t);return botSay(T()['b.askCode']);}
+  if(a==='human'){chat.step='h_email';userSend(c.t);return botSay(T()['b.askEmail']);}
+  if(a==='menu'){userSend(c.t);return menuStep();}
+  if(a==='form'){userSend(c.t);closeChat();setTimeout(()=>{$('#cotizar').scrollIntoView({behavior:reduce?'auto':'smooth'});const f=$('#quoteForm');f.classList.remove('form-flash');void f.offsetWidth;f.classList.add('form-flash');},300);return;}
+  if(a.startsWith('dest:')){chat.data.d=DESTS.find(x=>x.code===a.slice(5));chat.step='q_cargo';userSend(c.t);return botSay(T()['b.askCargo'],{chips:cargoChips()});}
+  if(a.startsWith('cargo:')){chat.data.c=a.slice(6);chat.step='idle';userSend(c.t);return quoteSummary();}
+  userSend(c.t);
+}
+function menuStep(){chat.step='idle';botSay(T()['b.greet'],{chips:menuChips()});}
+function quoteSummary(){
+  const{d,c}=chat.data;chat.step='idle';
+  botSay(T()['b.qResult'](d,T()['docs.'+c].length),
+    {chips:[{t:T()['b.cForm'],a:'form'},{t:T()['b.cHuman'],a:'human'},{t:T()['b.cMenu'],a:'menu'}]});
+}
+function hash(s){let h=0;for(const ch of s)h=(h*31+ch.charCodeAt(0))%997;return h;}
+function routeUser(text){
+  const t=norm(text),S=chat.step;
+  if(/^(menu|inicio|start|reset|help|ayuda)$/.test(t))return menuStep();
+  if(S==='idle'){
+    if(/gracias|thank/.test(t))return botSay(T()['b.thanks'],{chips:menuChips()});
+    if(/hola|hello|buenas|hey/.test(t))return menuStep();
+    if(/cotiz|precio|cost|cuanto|tarifa|quote|price/.test(t)){chat.step='q_dest';return botSay(T()['b.askDest'],{chips:destChips()});}
+    if(/rastre|track|donde esta|contenedor|container/.test(t)){chat.step='t_code';return botSay(T()['b.askCode']);}
+    if(/doc|paper|aduana|custom|certif|requisito/.test(t)){chat.step='d_type';return botSay(T()['b.docsIntro'],{chips:cargoChips()});}
+    if(/humano|human|persona|agente|asesor|email|correo/.test(t)){chat.step='h_email';return botSay(T()['b.askEmail']);}
+    return botSay(T()['b.fallback'],{chips:menuChips()});
+  }
+  if(S==='q_dest'){
+    const d=DESTS.find(d=>t.includes(d.code.toLowerCase())||t.includes(norm(d.city[LANG]))||t.includes(norm(d.city.es)));
+    if(d){chat.data.d=d;chat.step='q_cargo';return botSay(T()['b.askCargo'],{chips:cargoChips()});}
+    return botSay(T()['b.pickDest'],{chips:destChips()});
+  }
+  if(S==='q_cargo'||S==='d_type'){
+    let c=null;for(const x of CARGOS){if(t.includes(x)){c=x;break;}}
+    if(!c){
+      if(/agro|perec|frut|flores|flower|fruit|coffee|cafe|cacao|blueberr|aran|fresh|seafood|pesc/.test(t))c='agro';
+      else if(/textil|ropa|shoe|calzad|apparel/.test(t))c='textil';
+      else if(/quim|chem|miner|mineral|cobre|copper/.test(t))c='chem';
+      else if(/ecom|commerce|online|tienda|shop/.test(t))c='ecom';
+      else if(/general|seca|dry|other|otro/.test(t))c='general';
+    }
+    if(c){ if(S==='q_cargo'){chat.data.c=c;return quoteSummary();} chat.step='idle';return botSay(T()['b.docsList'](T()['cargo.'+c],T()['docs.'+c]),{chips:[{t:T()['b.cQuote'],a:'quote'},{t:T()['b.cMenu'],a:'menu'}]});}
+    return botSay(T()['b.pickCargo'],{chips:cargoChips()});
+  }
+  if(S==='t_code'){
+    const code=text.toUpperCase().replace(/[^A-Z0-9]/g,'');
+    if(/^[A-Z]{4}\d{6,7}$/.test(code)){
+      const sts=T()['b.statuses'];chat.step='idle';
+      return botSay(T()['b.trackOk'](code,sts[hash(code)%sts.length]),{chips:menuChips()});
+    }
+    return botSay(T()['b.codeBad'],{chips:[{t:T()['b.cTrack'],a:'track'},{t:T()['b.cHuman'],a:'human'}]});
+  }
+  if(S==='h_email'){
+    const m=text.match(/[\w.+-]+@[\w-]+\.[\w.]{2,}/);
+    if(m){chat.step='idle';return botSay(T()['b.humanDone'](m[0]),{chips:menuChips()});}
+    return botSay(T()['b.emailBad']);
+  }
+}
+
+/* ============ CERTIX VOICE ENGINE — sweet female es→Peru/LatAm · en-US ============ */
+const FEMALE_NAMES=['camila','dalia','sabina','paulina','monica','mónica','elvira','helena','laura','catalina','salome','salomé','isabela','mia','mía','lupe','ximena','aria','jenny','michelle','ava','allison','samantha','susan','zira','hazel','sonia','libby','emma','amber','ashley','cora','elizabeth','jane','joanna','kendra','kimberly','salli','victoria','karen','moira','tessa','google español','google us english'];
+const CERTIX_VOICE={es:null,en:null};
+const isFem=v=>FEMALE_NAMES.some(n=>v.name.toLowerCase().includes(n));
+
+function pickVoices(){
+  if(!('speechSynthesis' in window))return;
+  const all=speechSynthesis.getVoices();
+  if(!all.length)return;
+  /* SPANISH: Perú → Latinoamérica → any (female first) */
+  CERTIX_VOICE.es=
+    all.find(v=>/^es[-_]pe/i.test(v.lang)&&isFem(v)) ||
+    all.find(v=>/^es[-_]pe/i.test(v.lang)) ||
+    all.find(v=>/^es[-_](419|us|mx|cl|co|ar)/i.test(v.lang)&&isFem(v)) ||
+    all.find(v=>/^es[-_](419|us|mx|cl|co|ar)/i.test(v.lang)) ||
+    all.find(v=>/^es/i.test(v.lang)&&isFem(v)) ||
+    all.find(v=>/^es/i.test(v.lang)) || null;
+  /* ENGLISH: US female first (General American — professional East Coast standard) */
+  CERTIX_VOICE.en=
+    all.find(v=>/^en[-_]us/i.test(v.lang)&&isFem(v)) ||
+    all.find(v=>/^en[-_]us/i.test(v.lang)) ||
+    all.find(v=>/^en/i.test(v.lang)&&isFem(v)) ||
+    all.find(v=>/^en/i.test(v.lang)) || null;
+}
+if('speechSynthesis' in window){
+  pickVoices();
+  speechSynthesis.onvoiceschanged=()=>{pickVoices();buildVoiceSel();};
+}
+
+function speak(text){
+  try{
+    const u=new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g,''));
+    const v=CERTIX_VOICE[LANG];
+    if(v){u.voice=v;u.lang=v.lang;}else u.lang=LANG==='es'?'es-PE':'en-US';
+    u.rate=LANG==='es'?0.97:1.0;   /* unhurried = professional */
+    u.pitch=1.07;                  /* slightly higher = warm/sweet */
+    u.volume=1;
+    speechSynthesis.cancel();speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+function buildVoiceSel(){
+  const sel=$('#voiceSel');if(!sel||!('speechSynthesis' in window))return;
+  const all=speechSynthesis.getVoices().filter(v=>(LANG==='es'?/^es/i:/^en/i).test(v.lang));
+  const sorted=[...all].sort((a,b)=>(isFem(b)?1:0)-(isFem(a)?1:0));
+  sel.innerHTML=sorted.length?sorted.map(v=>`<option value="${v.name}"${CERTIX_VOICE[LANG]===v?' selected':''}>${isFem(v)?'♀ ':''}${v.name.slice(0,20)}</option>`).join(''):'<option>—</option>';
+  sel.onchange=()=>{
+    const v=sorted.find(x=>x.name===sel.value);
+    if(v){CERTIX_VOICE[LANG]=v;chat.voice=true;$('#volIcon').className='fas fa-volume-high text-xs';
+      speak(LANG==='es'?'Hola, soy Certix. Encantada de ayudarte.':"Hi, I'm Certix. Delighted to help you.");}
+  };
+}
+
+/* voice on/off with spoken greeting */
+ $('#voiceBtn').addEventListener('click',()=>{
+  chat.voice=!chat.voice;
+  $('#volIcon').className=chat.voice?'fas fa-volume-high text-xs':'fas fa-volume-xmark text-xs';
+  if(chat.voice) speak(LANG==='es'?'Hola, soy Certix, tu asistente de exportación. Encantada de ayudarte.':"Hi, I'm Certix, your export assistant. Delighted to help you.");
+  else try{speechSynthesis.cancel()}catch(e){}
+});
+
+/* ================= VOICE INPUT (speech-to-text) ================= */
+(function(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){const b=$('#micBtn');if(b)b.style.display='none';return;}
+  let rec=null,listening=false;
+  const setMic=on=>{
+    listening=on;
+    $('#micBtn').classList.toggle('listening',on);
+    $('#micIcon').className=on?'fas fa-microphone-lines text-xs':'fas fa-microphone text-xs';
+  };
+  rec=new SR();
+  rec.interimResults=true;rec.continuous=false;
+  rec.onresult=e=>{
+    cin.value=[...e.results].map(r=>r[0].transcript).join('');
+    if(e.results[e.results.length-1].isFinal){
+      const v=cin.value.trim();
+      if(v){
+        chat.voice=true;$('#volIcon').className='fas fa-volume-high text-xs'; /* spoken → spoken answer */
+        userSend(v);cin.value='';
+      }
+    }
+  };
+  rec.onend=()=>setMic(false);
+  rec.onerror=ev=>{
+    setMic(false);
+    if(ev.error==='not-allowed'){
+      addMsg('bot',LANG==='es'
+        ?'Necesito permiso del <b>micrófono</b>: haz clic en el candado 🔒 junto a la dirección y actívalo.'
+        :'I need <b>microphone</b> permission: click the padlock 🔒 next to the address bar and allow it.');
+    }
+  };
+  $('#micBtn').addEventListener('click',()=>{
+    if(!chat.open)return;
+    if(listening){rec.stop();return;}
+    rec.lang=LANG==='es'?'es-PE':'en-US';
+    try{rec.start();setMic(true);}catch(e){}
+  });
+})();
+
+/* ================= CHAT OPEN/CLOSE ================= */
+function openChat(){
+  panel.classList.add('open');hideAttn();
+  $('.chat-fab .i-chatc').style.display='none';$('.chat-fab .i-xc').style.display='block';$('.chat-fab .badge-dot').style.display='none';
+  chat.open=true;
+  if(!chat.greeted){chat.greeted=true;setTimeout(()=>botSay(T()['b.greet'],{chips:menuChips()}),450);}
+}
+function closeChat(){
+  panel.classList.remove('open');chat.open=false;
+  $('.chat-fab .i-chatc').style.display='block';$('.chat-fab .i-xc').style.display='none';
+  try{speechSynthesis.cancel()}catch(e){}
+}
+ $('#fab').addEventListener('click',()=>chat.open?closeChat():openChat());
+ $('#chatSend').addEventListener('click',()=>{const v=cin.value.trim();if(v){userSend(v);cin.value='';}});
+cin.addEventListener('keydown',e=>{if(e.key==='Enter'){const v=cin.value.trim();if(v){userSend(v);cin.value='';}}});
+function hideAttn(){$('#chatAttn').classList.remove('show');}
+setTimeout(()=>{if(!chat.greeted)$('#chatAttn').classList.add('show');},15000);
+
+/* ================= INIT ================= */
+applyLang(LANG);
+</script>
 </body>
 </html>
