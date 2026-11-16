@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AiCertix — IA Agentes de Exportación Automatizada desde el Perú</title>
 <meta name="description" content="AiCertix automatiza todo el proceso de exportación desde el Perú hacia China, EE. UU., la UE, Asia y el mundo.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23E85D04'/><text x='16' y='23' font-family='Arial' font-size='18' font-weight='800' text-anchor='middle' fill='white'>A</text></svg>">
+<link rel="icon" type="image/png" href="assets/favicon.png"><rect width='32' height='32' rx='7' fill='%23E85D04'/><text x='16' y='23' font-family='Arial' font-size='18' font-weight='800' text-anchor='middle' fill='white'>A</text></svg>">
 <link rel="preload" as="image" href="port-hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,6 +37,11 @@
     background:linear-gradient(to bottom,rgba(0,0,0,.86) 0%,rgba(0,0,0,.72) 58%,rgba(0,0,0,0) 100%);
     -webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
     -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 58%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 58%,transparent 100%)}
+  /* brand lockup: logo mark + name */
+  .brand-logo{height:46px;width:auto;flex:none;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45))}
+  .brand-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.5rem;line-height:1;letter-spacing:-.015em;color:#FFFFFF;
+    text-shadow:0 1px 10px rgba(0,0,0,.55)}
+  @media (max-width:480px){.brand-logo{height:40px}.brand-name{font-size:1.3rem}}
   .nav-link{color:var(--accent);font-weight:700;transition:color .2s}
   .nav-link:hover,.nav-link:focus-visible{color:#fff}
 
@@ -198,13 +203,14 @@
     opacity:0;transform:translateY(14px) scale(.98);pointer-events:none;transition:.28s cubic-bezier(.2,1.2,.4,1);transform-origin:bottom right}
   .chat.open{opacity:1;transform:none;pointer-events:auto}
   .c-head{background:#000;border-bottom:1px solid var(--border);padding:13px 15px;display:flex;align-items:center;gap:9px}
-  .c-av{width:36px;height:36px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:18px;flex:none}
+  .c-av{width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex:none}
+  .c-av img,.bavatar img{width:100%;height:100%;object-fit:contain;display:block}
   .c-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;line-height:1.1;color:#fff}
   .c-role{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;color:var(--fg-dim);text-transform:uppercase}
   .c-log{flex:1;overflow-y:auto;padding:15px 13px;display:flex;flex-direction:column}
   .c-log::-webkit-scrollbar{width:5px}.c-log::-webkit-scrollbar-thumb{background:#222}
   .msg{display:flex;gap:8px;margin-bottom:12px;align-items:flex-end}
-  .bavatar{width:22px;height:22px;flex:none;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:12px}
+  .bavatar{width:26px;height:26px;flex:none;display:flex;align-items:center;justify-content:center}
   .bubble{max-width:82%;padding:10px 13px;font-size:13.5px;line-height:1.5}
   .msg.bot .bubble{background:#181818;border:1px solid var(--border);color:#e8e8e8;border-bottom-left-radius:2px}
   .msg.user{justify-content:flex-end}
@@ -257,10 +263,10 @@
 <!-- ============ HEADER ============ -->
 <header class="site-header fixed top-0 left-0 right-0 z-50">
   <div class="max-w-[1600px] mx-auto px-6 py-3.5 flex items-center justify-between">
-    <a href="#" class="flex items-center gap-3">
-      <div class="w-9 h-9 flex items-center justify-center font-display text-xl" style="background:var(--accent);color:#fff">A</div>
+    <a href="#" class="brand flex items-center gap-3" aria-label="AiCertix">
+      <img src="assets/logo.png" alt="" width="318" height="320" class="brand-logo">
       <div class="flex flex-col leading-none">
-        <span class="font-display text-xl tracking-tight text-white">AiCertix</span>
+        <span class="brand-name">AiCertix</span>
         <span class="text-[9px] font-mono tracking-[0.32em] mt-1" style="color:var(--accent)">IA AGENTES DE EXPORTACIONES</span>
         <span class="text-[8px] font-mono tracking-widest text-white mt-0.5">Nuevo Sistema · Exportación Automatizada</span>
       </div>
@@ -599,10 +605,10 @@
   <div class="max-w-[1600px] mx-auto px-6 py-16">
     <div class="grid md:grid-cols-12 gap-10">
       <div class="md:col-span-5">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-9 h-9 flex items-center justify-center font-display text-xl" style="background:var(--accent);color:#fff">A</div>
+        <div class="brand flex items-center gap-3 mb-4">
+          <img src="assets/logo.png" alt="" width="318" height="320" class="brand-logo" loading="lazy">
           <div class="flex flex-col leading-none">
-            <span class="font-display text-xl tracking-tight text-white">AiCertix</span>
+            <span class="brand-name">AiCertix</span>
             <span class="text-[9px] font-mono tracking-[0.32em] mt-1" style="color:var(--accent)">IA AGENTES DE EXPORTACIONES</span>
             <span class="text-[8px] font-mono tracking-widest text-white mt-0.5">Nuevo Sistema · Exportación Automatizada</span>
           </div>
@@ -663,7 +669,7 @@
 </div>
 <div class="chat" id="chatPanel">
   <div class="c-head">
-    <div class="c-av">A</div>
+    <div class="c-av"><img src="assets/logo.png" alt="" width="318" height="320"></div>
     <div><div class="c-name" data-i18n="ch.name"></div><div class="c-role" data-i18n="ch.role"></div></div>
     <span class="flex-1"></span>
     <select id="voiceSel" class="c-voice" aria-label="Voz de Certix"></select>
@@ -1085,7 +1091,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeChat();}})
 /* ================= CHAT BOT ================= */
 const chat={open:false,step:'idle',data:{},voice:false,greeted:false};
 const panel=$('#chatPanel'),log=$('#chatLog'),chipsRow=$('#chatChips'),cin=$('#chatInput');
-const AVATAR=`<div class="bavatar">A</div>`;
+const AVATAR=`<div class="bavatar"><img src="assets/logo.png" alt="" width="318" height="320"></div>`;
 const menuChips=()=>[{t:T()['b.cQuote'],a:'quote'},{t:T()['b.cDocs'],a:'docs'},{t:T()['b.cTrack'],a:'track'},{t:T()['b.cHuman'],a:'human'}];
 const destChips=()=>DESTS.map(d=>({t:`${d.city[LANG]} (${d.code})`,a:'dest:'+d.code}));
 const cargoChips=()=>CARGOS.map(c=>({t:T()['cargo.'+c],a:'cargo:'+c}));
@@ -1104,16 +1110,17 @@ function botSay(text,opts={}){
   },Math.min(1500,550+text.length*5));
 }
 function userSend(text){addMsg('user',esc(text));chipsRow.innerHTML='';routeUser(text);}
+function userEcho(text){addMsg('user',esc(text));chipsRow.innerHTML='';} /* chip taps: show the choice, the chip handler answers */
 function handleChip(c){
   const a=c.a;
-  if(a==='quote'){chat.step='q_dest';userSend(c.t);return botSay(T()['b.askDest'],{chips:destChips()});}
-  if(a==='docs'){chat.step='d_type';userSend(c.t);return botSay(T()['b.docsIntro'],{chips:cargoChips()});}
-  if(a==='track'){chat.step='t_code';userSend(c.t);return botSay(T()['b.askCode']);}
-  if(a==='human'){chat.step='h_email';userSend(c.t);return botSay(T()['b.askEmail']);}
-  if(a==='menu'){userSend(c.t);return menuStep();}
-  if(a==='form'){userSend(c.t);closeChat();setTimeout(()=>{$('#cotizar').scrollIntoView({behavior:reduce?'auto':'smooth'});const f=$('#quoteForm');f.classList.remove('form-flash');void f.offsetWidth;f.classList.add('form-flash');},300);return;}
-  if(a.startsWith('dest:')){chat.data.d=DESTS.find(x=>x.code===a.slice(5));chat.step='q_cargo';userSend(c.t);return botSay(T()['b.askCargo'],{chips:cargoChips()});}
-  if(a.startsWith('cargo:')){chat.data.c=a.slice(6);chat.step='idle';userSend(c.t);return quoteSummary();}
+  if(a==='quote'){chat.step='q_dest';userEcho(c.t);return botSay(T()['b.askDest'],{chips:destChips()});}
+  if(a==='docs'){chat.step='d_type';userEcho(c.t);return botSay(T()['b.docsIntro'],{chips:cargoChips()});}
+  if(a==='track'){chat.step='t_code';userEcho(c.t);return botSay(T()['b.askCode']);}
+  if(a==='human'){chat.step='h_email';userEcho(c.t);return botSay(T()['b.askEmail']);}
+  if(a==='menu'){userEcho(c.t);return menuStep();}
+  if(a==='form'){userEcho(c.t);closeChat();setTimeout(()=>{$('#cotizar').scrollIntoView({behavior:reduce?'auto':'smooth'});const f=$('#quoteForm');f.classList.remove('form-flash');void f.offsetWidth;f.classList.add('form-flash');},300);return;}
+  if(a.startsWith('dest:')){chat.data.d=DESTS.find(x=>x.code===a.slice(5));chat.step='q_cargo';userEcho(c.t);return botSay(T()['b.askCargo'],{chips:cargoChips()});}
+  if(a.startsWith('cargo:')){chat.data.c=a.slice(6);chat.step='idle';userEcho(c.t);return quoteSummary();}
   userSend(c.t);
 }
 function menuStep(){chat.step='idle';botSay(T()['b.greet'],{chips:menuChips()});}
