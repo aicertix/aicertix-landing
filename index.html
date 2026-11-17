@@ -103,8 +103,9 @@
   .section-label::before{content:'';width:36px;height:1px;background:currentColor}
 
   /* marquee */
-  .marquee-wrap{overflow:hidden;white-space:nowrap;background:#FFFFFF;color:#000000;padding-block:1.25rem}
-  .marquee-track.font-display{font-weight:400}
+  .marquee-wrap{overflow:hidden;white-space:nowrap;background:#FFFFFF;color:#7A8086;padding-block:1.1rem}
+  .marquee-track.font-display{font-weight:400;letter-spacing:-.01em;line-height:1.2}
+  .marquee-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#E85F04;margin-inline:.9rem;flex:none}
   .marquee-track{display:inline-flex;animation:marquee 38s linear infinite;align-items:center}
   @keyframes marquee{to{transform:translateX(-50%)}}
 
@@ -264,11 +265,11 @@
 <header class="site-header fixed top-0 left-0 right-0 z-50">
   <div class="max-w-[1600px] mx-auto px-6 py-3.5 flex items-center justify-between">
     <a href="#" class="brand flex items-center gap-3" aria-label="AiCertix">
-      <img src="assets/logo.png" alt="" width="318" height="320" class="brand-logo">
+      <img src="assets/logo.png" alt="" width="304" height="320" class="brand-logo">
       <div class="flex flex-col leading-none">
         <span class="brand-name">AiCertix</span>
-        <span class="text-[9px] font-mono tracking-[0.32em] mt-1" style="color:var(--accent)">IA AGENTES DE EXPORTACIONES</span>
-        <span class="text-[8px] font-mono tracking-widest text-white mt-0.5">Nuevo Sistema · Exportación Automatizada</span>
+        <span class="text-[9px] font-mono tracking-[0.32em] mt-1" style="color:var(--accent)">AGENTES IA DE EXPORTACIONES</span>
+        <span class="text-[8px] font-mono tracking-widest text-white mt-0.5">Sistema Automatizado · Exportación</span>
       </div>
     </a>
 
@@ -375,7 +376,7 @@
 </section>
 
 <!-- MARQUEE -->
-<div class="marquee-wrap"><div class="marquee-track font-display text-xl md:text-2xl" id="marquee"></div></div>
+<div class="marquee-wrap"><div class="marquee-track font-display text-base md:text-lg" id="marquee"></div></div>
 
 <!-- ============ 01 · BENTO ============ -->
 <section id="operacion" class="px-6 py-16 md:py-24">
@@ -606,20 +607,20 @@
     <div class="grid md:grid-cols-12 gap-10">
       <div class="md:col-span-5">
         <div class="brand flex items-center gap-3 mb-4">
-          <img src="assets/logo.png" alt="" width="318" height="320" class="brand-logo" loading="lazy">
+          <img src="assets/logo.png" alt="" width="304" height="320" class="brand-logo" loading="lazy">
           <div class="flex flex-col leading-none">
             <span class="brand-name">AiCertix</span>
-            <span class="text-[9px] font-mono tracking-[0.32em] mt-1" style="color:var(--accent)">IA AGENTES DE EXPORTACIONES</span>
-            <span class="text-[8px] font-mono tracking-widest text-white mt-0.5">Nuevo Sistema · Exportación Automatizada</span>
+            <span class="text-[9px] font-mono tracking-[0.32em] mt-1" style="color:var(--accent)">AGENTES IA DE EXPORTACIONES</span>
+            <span class="text-[8px] font-mono tracking-widest text-white mt-0.5">Sistema Automatizado · Exportación</span>
           </div>
         </div>
         <p class="text-sm text-[var(--fg-dim)] max-w-sm mb-6" data-i18n="ft.tag"></p>
         <div class="bx-lab mb-3" data-i18n="ft.social"></div>
         <div class="flex gap-2.5">
-          <a href="https://www.linkedin.com/company/aicertix" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-linkedin-in text-sm"></i></a>
-          <a href="https://x.com/aicertix" target="_blank" rel="noopener" aria-label="X" class="w-10 h-10 border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-x-twitter text-sm"></i></a>
-          <a href="https://www.instagram.com/aicertix" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-instagram text-sm"></i></a>
-          <a href="https://www.youtube.com/@aicertix" target="_blank" rel="noopener" aria-label="YouTube" class="w-10 h-10 border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-youtube text-sm"></i></a>
+          <a href="https://www.linkedin.com/company/aicertix" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 rounded-xl border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-linkedin-in text-sm"></i></a>
+          <a href="https://x.com/aicertix" target="_blank" rel="noopener" aria-label="X" class="w-10 h-10 rounded-xl border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-x-twitter text-sm"></i></a>
+          <a href="https://www.instagram.com/aicertix" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-instagram text-sm"></i></a>
+          <a href="https://www.youtube.com/@aicertix" target="_blank" rel="noopener" aria-label="YouTube" class="w-10 h-10 rounded-xl border border-[var(--accent)] flex items-center justify-center text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition"><i class="fab fa-youtube text-sm"></i></a>
         </div>
       </div>
       <div class="md:col-span-2">
@@ -669,7 +670,7 @@
 </div>
 <div class="chat" id="chatPanel">
   <div class="c-head">
-    <div class="c-av"><img src="assets/logo.png" alt="" width="318" height="320"></div>
+    <div class="c-av"><img src="assets/logo.png" alt="" width="304" height="320"></div>
     <div><div class="c-name" data-i18n="ch.name"></div><div class="c-role" data-i18n="ch.role"></div></div>
     <span class="flex-1"></span>
     <select id="voiceSel" class="c-voice" aria-label="Voz de Certix"></select>
@@ -767,7 +768,7 @@ es:{
 'legal.privacy':`<h4>1. Responsable</h4><p>AiCertix EIRL (RUC 20614997762), Terminales Portuarios, Perú. Contacto de datos personales: <b>hola@aicertix.com</b>.</p><h4>2. Datos que tratamos</h4><p>Datos de identificación y contacto; información comercial y de carga (descripciones, códigos HS, documentos de embarque); datos de uso de la plataforma; y conversaciones con nuestro asistente virtual.</p><h4>3. Finalidades</h4><p>Prestar el servicio de automatización de exportación; cumplir obligaciones aduaneras y tributarias ante SUNAT; facturar; mejorar la plataforma; y enviar novedades solo con tu consentimiento.</p><h4>4. Base jurídica</h4><p>Ejecución de contrato, cumplimiento de obligaciones legales, interés legítimo y consentimiento. Aplicamos la Ley N° 29733 de Protección de Datos Personales del Perú y, para usuarios de la UE, el RGPD.</p><h4>5. Conservación</h4><p>Conservamos tus datos durante la relación comercial y, después, los plazos exigidos por la normativa aduanera y tributaria (generalmente 5 años).</p><h4>6. Destinatarios y transferencias</h4><p>Líneas navieras y agentes de carga, autoridades aduaneras y de control, y proveedores tecnológicos bajo contratos de encargo. Las transferencias internacionales usan garantías adecuadas.</p><h4>7. Tus derechos</h4><p>Acceso, actualización, rectificación, cancelación y oposición (ARCO). Escribe a <b>hola@aicertix.com</b> y responderemos en máximo 15 días hábiles.</p><h4>8. Autoridad de control</h4><p>Puedes acudir a la Autoridad Nacional de Protección de Datos Personales (Perú), a Indecopi o a la autoridad de tu país.</p>`,
 'legal.terms':`<h4>1. Objeto</h4><p>Estas condiciones regulan el uso de aicertix.com y de los servicios de automatización y agenciamiento de exportación de AiCertix EIRL</p><h4>2. Naturaleza del servicio</h4><p>AiCertix actúa como agente logístico y facilitador de comercio exterior. No es transportador ni aseguradora; los embarques se rigen por los contratos de las líneas navieras y por los Incoterms® 2020 acordados por las partes.</p><h4>3. Uso de la plataforma</h4><p>Debes suministrar información veraz, contar con tus licencias de exportador ante SUNAT y no transportar mercancías prohibidas, ilícitas o sancionadas.</p><h4>4. Precios y pagos</h4><p>Las cotizaciones son orientativas hasta la confirmación de la reserva. Los precios no incluyen impuestos locales salvo indicación expresa.</p><h4>5. Responsabilidad</h4><p>Respondemos por la diligencia debida en la gestión documental y de despacho. La responsabilidad sobre la mercancía corresponde al transportador conforme a los convenios aplicables. No respondemos por fuerza mayor, huelgas, clima o decisiones aduaneras.</p><h4>6. Ley y jurisdicción</h4><p>Estas condiciones se rigen por las leyes del Perú; toda controversia se someterá a los tribunales del Perú, salvo normas imperativas de consumo de tu país.</p><h4>7. Modificaciones</h4><p>Publicaremos cualquier cambio en esta página con 15 días de antelación.</p>`,
 'legal.cookies':`<h4>Qué cookies usamos</h4><p><b>Esenciales:</b> sesión, seguridad e idioma de preferencia. Sin ellas la plataforma no funciona.</p><h4>Analíticas</h4><p>Métricas agregadas de uso para mejorar el servicio. Las direcciones IP se anonimizan.</p><h4>Cómo gestionarlas</h4><p>Puedes borrar o bloquear cookies desde tu navegador. Desactivar las esenciales puede impedir el inicio de sesión.</p><h4>Contacto</h4><p>Dudas sobre cookies: <b>hola@aicertix.com</b>.</p>`,
-'MQ':['PERÚ AL MUNDO','CAFÉ','ESPÁRRAGOS','ARÁNDANOS','QUINUA','PALTAS','CACAO','COBRE','TEXTILES','HARINA DE PESCADO'],
+'MQ':['Del Perú al Mundo','Café','Espárragos','Arándanos','Quinua','Paltas','Cacao','Cobre','Textiles','Harina de Pescado'],
 'MDOCS':[['Conocimiento de embarque (B/L)','0.4 s'],['Factura comercial','0.9 s'],['Packing list','1.2 s'],['Certificado de origen','0.4 s'],['Certificado sanitario','2.1 s'],['Seguro de carga','0.3 s']],
 'FIL':[['all','Todos'],['asia','Asia'],['na','Norteamérica'],['eu','Europa']],
 'VOL':['1–5 toneladas (LCL)','6–20 toneladas (LCL)','21–100 toneladas','Contenedor completo (FCL)','Más de 1 contenedor'],
@@ -851,7 +852,7 @@ en:{
 'legal.privacy':`<h4>1. Controller</h4><p>AiCertix EIRL (Tax ID 20614997762), Port Terminals, Peru. Data protection contact: <b>hola@aicertix.com</b>.</p><h4>2. Data we process</h4><p>Identification and contact data; commercial and cargo information (descriptions, HS codes, shipping documents); platform usage data; and conversations with our virtual assistant.</p><h4>3. Purposes</h4><p>Providing the export automation service; meeting customs and tax obligations before SUNAT; invoicing; improving the platform; and sending updates only with your consent.</p><h4>4. Legal basis</h4><p>Contract performance, legal obligations, legitimate interest and consent. We apply Peru's Law N° 29733 on Personal Data Protection and, for EU users, the GDPR.</p><h4>5. Retention</h4><p>We keep your data while the business relationship exists and afterwards for the periods required by customs and tax regulations (generally 5 years).</p><h4>6. Recipients and transfers</h4><p>Ocean carriers and freight agents, customs and control authorities, and technology vendors under processing agreements. International transfers use adequate safeguards.</p><h4>7. Your rights</h4><p>Access, updating, rectification, cancellation and opposition (ARCO). Write to <b>hola@aicertix.com</b> and we will reply within 15 business days.</p><h4>8. Supervisory authority</h4><p>You may contact the National Authority for Personal Data Protection (Peru), Indecopi, or your local authority.</p>`,
 'legal.terms':`<h4>1. Scope</h4><p>These terms govern the use of aicertix.com and of the export automation and brokerage services of AiCertix EIRL</p><h4>2. Nature of the service</h4><p>AiCertix does not act as a logistics agent; it is only a foreign-trade facilitator. It is not a carrier or insurer; shipments are governed by the carriers' contracts and by the Incoterms® 2020 agreed by the parties.</p><h4>3. Use of the platform</h4><p>You must provide truthful information, hold your exporter licenses before SUNAT, and must not ship prohibited, illicit or sanctioned goods.</p><h4>4. Pricing and payment</h4><p>Quotes are indicative until the booking is confirmed. Prices exclude local taxes unless expressly stated.</p><h4>5. Liability</h4><p>We are responsible for due diligence in documentation and clearance management. Liability for the goods lies with the carrier under the applicable conventions. We are not liable for force majeure, strikes, weather or customs decisions.</p><h4>6. Governing law</h4><p>These terms are governed by the laws of Peru; disputes fall under the courts of Peru, save mandatory consumer rules of your country.</p><h4>7. Changes</h4><p>Any changes will be published on this page 15 days in advance.</p>`,
 'legal.cookies':`<h4>Cookies we use</h4><p><b>Essential:</b> session, security and language preference. The platform cannot work without them.</p><h4>Analytics</h4><p>Aggregated usage metrics to improve the service. IP addresses are anonymized.</p><h4>Managing cookies</h4><p>You can delete or block cookies in your browser settings. Disabling essential cookies may prevent login.</p><h4>Contact</h4><p>Cookie questions: <b>hola@aicertix.com</b>.</p>`,
-'MQ':['PERU TO THE WORLD','COFFEE','ASPARAGUS','BLUEBERRIES','QUINOA','AVOCADOS','CACAO','COPPER','TEXTILES','FISHMEAL'],
+'MQ':['From Peru to the World','Coffee','Asparagus','Blueberries','Quinoa','Avocados','Cacao','Copper','Textiles','Fishmeal'],
 'MDOCS':[['Bill of lading (B/L)','0.4 s'],['Commercial invoice','0.9 s'],['Packing list','1.2 s'],['Certificate of origin','0.4 s'],['Sanitary certificate','2.1 s'],['Cargo insurance','0.3 s']],
 'FIL':[['all','All'],['asia','Asia'],['na','North America'],['eu','Europe']],
 'VOL':['1–5 tons (LCL)','6–20 tons (LCL)','21–100 tons','Full container (FCL)','More than 1 container'],
@@ -916,7 +917,7 @@ function applyLang(l){
 
 /* ================= MARQUEE ================= */
 function buildMarquee(){
-  const one=T().MQ.map(t=>`<span class="px-6">${t}</span><span class="px-3" style="color:var(--red)">●</span>`).join('');
+  const one=T().MQ.map(t=>`<span class="px-5">${t}</span><span class="marquee-dot" aria-hidden="true"></span>`).join('');
   $('#marquee').innerHTML=one+one;
 }
 
@@ -1091,7 +1092,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeChat();}})
 /* ================= CHAT BOT ================= */
 const chat={open:false,step:'idle',data:{},voice:false,greeted:false};
 const panel=$('#chatPanel'),log=$('#chatLog'),chipsRow=$('#chatChips'),cin=$('#chatInput');
-const AVATAR=`<div class="bavatar"><img src="assets/logo.png" alt="" width="318" height="320"></div>`;
+const AVATAR=`<div class="bavatar"><img src="assets/logo.png" alt="" width="304" height="320"></div>`;
 const menuChips=()=>[{t:T()['b.cQuote'],a:'quote'},{t:T()['b.cDocs'],a:'docs'},{t:T()['b.cTrack'],a:'track'},{t:T()['b.cHuman'],a:'human'}];
 const destChips=()=>DESTS.map(d=>({t:`${d.city[LANG]} (${d.code})`,a:'dest:'+d.code}));
 const cargoChips=()=>CARGOS.map(c=>({t:T()['cargo.'+c],a:'cargo:'+c}));
