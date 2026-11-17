@@ -1,4 +1,4 @@
-# AiCertix landing page (v2.1)
+# AiCertix landing page (v2.3)
 
 Static site (`index.html`, images, `assets/`) plus one serverless function, `api/solicitud.js`,
 which saves each form request in Supabase and emails it to the team.
